@@ -1,0 +1,1943 @@
+#################################################################
+#
+#	XBPM  Database
+#
+#################################################################
+#IOC Version
+record(stringin, "$(DEVICE_NAME)SWVersion-I") {
+	field(SCAN, "1 second")
+	field(DESC, "IOC version")
+	field(VAL, "2.6") #IOC VERSION	
+}
+
+#IOC IP
+record(stringin, "$(DEVICE_NAME)IPADDR-I") {
+	field(DESC, "Unit IP Address")
+	field(SCAN, "1 second")	
+}
+
+#IOC SERIAL NUMBER
+record(stringin, "$(DEVICE_NAME)SERIAL-I") {
+	field(DESC, "Unit Serial Number")
+	field(SCAN, "1 second")	
+}
+
+#################################################################
+#
+#  Connection Related Records
+#
+#################################################################
+
+record(bo, "$(DEVICE_NAME)wfm-RECONNECT") {
+   	field(DTYP, "PSC Ctrl Reconnect")
+  	field(OUT , "@aie_wfm_rx_$(DEVICE_NAME)")
+  	field(ZNAM, "Reconnect")
+  	field(ONAM, "Reconnect")
+}
+
+record(bi, "$(DEVICE_NAME)wfm-conn") {
+	field(DTYP, "PSC Ctrl Connected")
+	field(INP , "@aie_wfm_rx_$(DEVICE_NAME)")
+	field(SCAN, "I/O Intr")
+	field(ZNAM, "Disconnected")
+	field(ONAM, "Connected")
+	field(ZSV , "MAJOR")
+}
+
+record(bi, "$(DEVICE_NAME)Rx-conn") {
+	field(DTYP, "PSC Ctrl Connected")
+	field(INP , "@Rx$(DEVICE_NAME)")
+	field(SCAN, "I/O Intr")
+	field(ZNAM, "Disconnected")
+	field(ONAM, "Connected")
+	field(ZSV , "MAJOR")
+}
+
+record(stringin, "$(DEVICE_NAME)tx-msg") {
+	field(DTYP, "PSC Ctrl Message")
+	field(INP , "@aie_tx_$(DEVICE_NAME)")
+	field(DESC, "Last message")
+	field(SCAN, "I/O Intr")
+}
+
+##flush reg to socket buffer, trigger send to send all socket buffer to PSC
+
+record(bo, "$(DEVICE_NAME)send") {
+	field(DTYP, "PSC Ctrl Send All")
+	field(OUT , "@aie_tx_$(DEVICE_NAME)")
+	field(ZNAM, "Send")
+	field(ONAM, "Send")
+}
+
+record(longout, "$(DEVICE_NAME)GoRegSingleWrite") {
+	field(DTYP, "PSC Ctrl Send")
+	field(OUT , "@aie_tx_$(DEVICE_NAME)")
+	field(VAL , "1")
+	field(FLNK, "$(DEVICE_NAME)send")
+}
+
+################################################################
+# CONTROLS
+#     aie_tx (Msg ID, address)
+#
+################################################################
+
+#DEGUG LEDS-SET
+record(longout, "$(DEVICE_NAME)Leds-SP") {
+   	field(DESC, "Debug LEDS")
+   	field(DTYP, "PSC Single I32")
+	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 5")
+   	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+#ADC CLOCK SOURCE-SET
+record(mbbo, "$(DEVICE_NAME)ClkSrc-SP"){
+	field(DESC, "Digitizer clock source")
+	field(DTYP, "PSC Single U32")
+	field(OUT , "@aie_tx_$(DEVICE_NAME) 1 11")
+	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+	field(ZRST, "External")
+	field(ZRVL, "0")
+	field(ONST, "Internal")
+	field(ONVL, "1")
+	field(TWST, "EVR")
+	field(TWVL, "2")
+}
+
+#POSITION-SET
+record(longout, "$(DEVICE_NAME)Pos:Kx-SP") {
+  	field(DESC, "Horizontal position calibration constant")
+ 	field(DTYP, "PSC Single I32")
+   	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 17")
+  	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(longout, "$(DEVICE_NAME)Pos:Ky-SP") {
+  	field(DESC, "Vertical position calibration constant")
+  	field(DTYP, "PSC Single I32")
+  	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 18")
+ 	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+#OFFSETS-SET
+record(longout, "$(DEVICE_NAME)Cal:AOffset-SP") {
+    field(DESC, "Channel A offset (adc counts)")
+   	field(DTYP, "PSC Single I32")
+   	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 20")
+   	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(longout, "$(DEVICE_NAME)Cal:BOffset-SP") {
+  	field(DESC, "Channel B offset (adc counts)")
+  	field(DTYP, "PSC Single I32")
+  	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 21")
+  	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(longout, "$(DEVICE_NAME)Cal:COffset-SP") {
+  	field(DESC, "Channel C offset (adc counts)")
+   	field(DTYP, "PSC Single I32")
+  	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 22")
+  	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(longout, "$(DEVICE_NAME)Cal:DOffset-SP") {
+  	field(DESC, "Channel D offset (adc counts)")
+  	field(DTYP, "PSC Single I32")
+  	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 23")
+  	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+#GAINS-SET
+record(longout, "$(DEVICE_NAME)Cal:AGain-SP") {
+  	field(DESC, "Channel A gain (pA/adc)")
+  	field(DTYP, "PSC Single I32")
+  	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 24")
+ 	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(longout, "$(DEVICE_NAME)Cal:BGain-SP") {
+  	field(DESC, "Channel B gain (pA/adc)")
+ 	field(DTYP, "PSC Single I32")
+  	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 25")
+ 	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(longout, "$(DEVICE_NAME)Cal:CGain-SP") {
+ 	field(DESC, "Channel C gain (pA/adc)")
+  	field(DTYP, "PSC Single I32")
+ 	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 26")
+  	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(longout, "$(DEVICE_NAME)Cal:DGain-SP") {
+ 	field(DESC, "Channel D gain (pA/adc)")
+   	field(DTYP, "PSC Single I32")
+  	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 27")
+  	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+#CHANNEL BIAS-SET
+record(bo, "$(DEVICE_NAME)Channel:InnerShieldConn-SP") {
+	field(DESC, "Channel triax inner shield connection")
+	field(DTYP, "PSC Single U32")
+	field(OUT , "@aie_tx_$(DEVICE_NAME) 1 29")
+   	field(ZNAM,"Grounded")
+   	field(ONAM,"Biased")
+	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(bo, "$(DEVICE_NAME)Channel:InnerShieldConn-SP") {
+	field(DESC, "Channel triax inner shield connection")
+	field(DTYP, "PSC Single U32")
+	field(OUT , "@aie_tx_$(DEVICE_NAME) 1 29")
+   	field(ZNAM,"Grounded")
+   	field(ONAM,"Biased")
+	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(bo, "$(DEVICE_NAME)Channel:BiasSource-SP") {
+	field(DESC, "Channel bias source")
+	field(DTYP, "PSC Single U32")
+	field(OUT , "@aie_tx_$(DEVICE_NAME) 1 38")
+   	field(ZNAM,"Internal")
+   	field(ONAM,"External")
+	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+#INTERNAL BIAS-SET
+
+# Options for seq record(2^n + 2^(n-1))
+record(mbbo, "$(DEVICE_NAME)IntBias:Pol-SP"){
+	field(DESC, "Bias polarity")
+	field(DTYP, "Raw Soft Channel")	
+	field(FLNK,"$(DEVICE_NAME)IntBias:Cal_Set")
+	field(ZRST, "Positive")
+	field(ZRVL, "271")
+	field(ONST, "Negative")
+	field(ONVL, "496")
+}
+
+# GAIN SET Subrecords level1
+record(seq,"$(DEVICE_NAME)IntBias:Cal_Set") {
+	field(SELM,"Mask")
+	field(SELL,"$(DEVICE_NAME)IntBias:Pol-SP.RVAL NPP NMS")	
+
+	#Positive Polarity     	271 dec = 0100001111 bin
+	field(DOL1,"0")
+	field(LNK1,"$(DEVICE_NAME)IntBias:Pol_Set PP NMS")	
+			
+	field(LNK2,"$(DEVICE_NAME)IntBias:Level-SP.AOFF PP NMS")
+	field(LNK3,"$(DEVICE_NAME)IntBias:Level-SP.ESLO PP NMS")
+	field(LNK4,"$(DEVICE_NAME)Bias:Out-I.AOFF PP NMS")
+	
+	#Negative polarity     496 dec = 0111110000 bin
+	field(DOL5,"1")
+	field(LNK5,"$(DEVICE_NAME)IntBias:Pol_Set PP NMS")
+	
+	field(LNK6,"$(DEVICE_NAME)IntBias:Level-SP.AOFF PP NMS")
+	field(LNK7,"$(DEVICE_NAME)IntBias:Level-SP.ESLO PP NMS")
+	field(LNK8,"$(DEVICE_NAME)Bias:Out-I.AOFF PP NMS")
+
+	#Reset bias
+	field(DLY9,"0.25")
+	field(DOL9,"0")
+	field(LNK9,"$(DEVICE_NAME)IntBias:Level-SP PP NMS")
+}	
+	
+record(bo, "$(DEVICE_NAME)IntBias:Pol_Set") {
+	field(DESC, "Bias polarity")
+	field(DTYP, "PSC Single U32")
+	field(OUT , "@aie_tx_$(DEVICE_NAME) 1 30")
+   	field(ZNAM, "Positive")
+   	field(ONAM, "Negative")
+	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(ao, "$(DEVICE_NAME)IntBias:LevelSetDAC-SP") {
+	field(DESC, "Set bias DAC")
+	field(DOL,"$(DEVICE_NAME)IntBias:Level-SP.RVAL")
+	field(OMSL, "closed_loop")	
+	field(OIF,"Full")
+	field(DRVH,"60000")
+	field(DRVL,"0")
+	field(DTYP, "PSC Single I32")
+   	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 36")
+ 	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(ao, "$(DEVICE_NAME)IntBias:Level-SP") {
+	field(DESC, "Bias voltage level")
+	field(OMSL, "supervisory")
+	field(LINR,"LINEAR")
+	field(PREC,"1")
+	field(DRVH,"40")
+	field(DRVL,"0")
+	field(FLNK, "$(DEVICE_NAME)IntBias:LevelSetDAC-SP")
+}
+
+#ELECTRODE BIAS-SET
+record(bo, "$(DEVICE_NAME)Bias:BiasSource-SP") {
+	field(DESC, "Bias source")
+	field(DTYP, "PSC Single U32")
+	field(OUT , "@aie_tx_$(DEVICE_NAME) 1 41")
+   	field(ZNAM,"Internal")
+   	field(ONAM,"External")
+	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(bo, "$(DEVICE_NAME)Bias:InnerShieldConn-SP") {
+	field(DESC, "Bias triax inner shield connection")
+	field(DTYP, "PSC Single U32")
+	field(OUT , "@aie_tx_$(DEVICE_NAME) 1 42")
+   	field(ZNAM,"Grounded")
+   	field(ONAM,"Biased")
+	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(bo, "$(DEVICE_NAME)Bias:Conn-SP") {
+	field(DESC, "Bias center conductor connection")
+	field(DTYP, "PSC Single U32")
+	field(OUT , "@aie_tx_$(DEVICE_NAME) 1 43")
+   	field(ZNAM,"Floating")
+   	field(ONAM,"Connected")
+	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+#GAIN-SET
+
+# GAIN-SET main record (level0)
+# Options for seq record(2^n + 2^(n-1))
+record(mbbo, "$(DEVICE_NAME)Gain:Level-SP"){
+	field(DESC, "Maximum current of gain level")
+	field(DTYP, "Raw Soft Channel")	
+	field(FLNK,"$(DEVICE_NAME)Gain:Level_Set")
+	field(ZRST, "1uA")
+	field(ZRVL, "3")
+	field(ONST, "10uA")
+	field(ONVL, "12")
+	field(TWST, "100uA")
+	field(TWVL, "48")
+	field(THST, "1mA")
+	field(THVL, "192")
+	field(FRST, "35mA")
+	field(FRVL, "768")
+}
+
+# GAIN SET Subrecords level1
+record(seq,"$(DEVICE_NAME)Gain:Level_Set") {
+	field(SELM,"Mask")
+	field(SELL,"$(DEVICE_NAME)Gain:Level-SP.RVAL NPP NMS")	
+
+	#1uA GAIN     	3 dec = 0000000011 bin
+	field(DOL1,"0")
+	field(LNK1,"$(DEVICE_NAME)Gain:Gain_Set PP NMS")		
+	field(DOL2,"3")
+	field(LNK2,"$(DEVICE_NAME)Cal:dfanout.VAL PP NMS")
+	
+	#10uA GAIN   	12 dec = 0000001100 bin
+	field(DOL3,"1")
+	field(LNK3,"$(DEVICE_NAME)Gain:Gain_Set PP NMS")
+	field(DOL4,"12")
+	field(LNK4,"$(DEVICE_NAME)Cal:dfanout.VAL PP NMS")
+	
+	#100uA GAIN  	48 dec = 0000110000 bin
+	field(DOL5,"2")
+	field(LNK5,"$(DEVICE_NAME)Gain:Gain_Set PP NMS")
+	field(DOL6,"48")
+	field(LNK6,"$(DEVICE_NAME)Cal:dfanout.VAL PP NMS")
+
+	#1mA GAIN   	192 dec = 0011000000 bin
+	field(DOL7,"3")
+	field(LNK7,"$(DEVICE_NAME)Gain:Gain_Set PP NMS")
+	field(DOL8,"192")
+	field(LNK8,"$(DEVICE_NAME)Cal:dfanout.VAL PP NMS")
+
+	#35mA GAIN  	768 dec = 1100000000 bin
+	field(DOL9,"4")   
+	field(LNK9,"$(DEVICE_NAME)Gain:Gain_Set PP NMS")
+	field(DOLA,"768")
+	field(LNKA,"$(DEVICE_NAME)Cal:dfanout.VAL PP NMS")
+}
+
+# GAIN SET Subrecords level2 
+record(dfanout,"$(DEVICE_NAME)Cal:dfanout"){
+	field(DESC,"Current Scaling")
+	field(OMSL,"closed_loop")
+	field(DOL,"$(DEVICE_NAME)Gain:Level_Set.RVAL PP NMS")	
+	field(OUTA,"$(DEVICE_NAME)ACalib_Set PP NMS")
+	field(OUTB,"$(DEVICE_NAME)BCalib_Set PP NMS")
+	field(OUTC,"$(DEVICE_NAME)CCalib_Set PP NMS")
+	field(OUTD,"$(DEVICE_NAME)DCalib_Set PP NMS")
+	field(OUTE,"$(DEVICE_NAME)Calib_Check:seq PP NMS")
+}
+
+record(mbbo, "$(DEVICE_NAME)Gain:Gain_Set"){
+	field(DTYP, "PSC Single U32")
+	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 28")	
+	field(ZRST, "1uA")
+	field(ZRVL, "1")
+	field(ONST, "10uA")
+	field(ONVL, "2")
+	field(TWST, "100uA")
+	field(TWVL, "4")
+	field(THST, "1mA")
+	field(THVL, "8")
+	field(FRST, "35mA")
+	field(FRVL, "16")
+	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")		
+}
+
+# GAIN-SET Subrecords level3
+record(seq,"$(DEVICE_NAME)ACalib_Set") {
+	field(SELM,"Mask")
+	field(SELL,"$(DEVICE_NAME)Cal:dfanout.VAL NPP NMS")
+
+	field(DLY1,"0.50")
+	field(LNK1,"$(DEVICE_NAME)Cal:AOffset-SP PP NMS")
+	field(LNK2,"$(DEVICE_NAME)Cal:AGain-SP PP NMS")
+
+	field(DLY3,"0.50")
+	field(LNK3,"$(DEVICE_NAME)Cal:AOffset-SP PP NMS")
+	field(LNK4,"$(DEVICE_NAME)Cal:AGain-SP PP NMS")
+
+	field(DLY5,"0.50")
+	field(LNK5,"$(DEVICE_NAME)Cal:AOffset-SP PP NMS")
+	field(LNK6,"$(DEVICE_NAME)Cal:AGain-SP PP NMS")
+
+	field(DLY7,"0.50")
+	field(LNK7,"$(DEVICE_NAME)Cal:AOffset-SP PP NMS")
+	field(LNK8,"$(DEVICE_NAME)Cal:AGain-SP PP NMS")
+
+	field(DLY9,"0.50")
+	field(LNK9,"$(DEVICE_NAME)Cal:AOffset-SP PP NMS")
+	field(LNKA,"$(DEVICE_NAME)Cal:AGain-SP PP NMS")
+}
+
+record(seq,"$(DEVICE_NAME)BCalib_Set") {
+	field(SELM,"Mask")
+	field(SELL,"$(DEVICE_NAME)Cal:dfanout.VAL NPP NMS")
+
+	field(DLY1,"1.00")
+	field(LNK1,"$(DEVICE_NAME)Cal:BOffset-SP PP NMS")
+	field(LNK2,"$(DEVICE_NAME)Cal:BGain-SP PP NMS")
+
+	field(DLY3,"1.00")
+	field(LNK3,"$(DEVICE_NAME)Cal:BOffset-SP PP NMS")
+	field(LNK4,"$(DEVICE_NAME)Cal:BGain-SP PP NMS")
+
+	field(DLY5,"1.00")
+	field(LNK5,"$(DEVICE_NAME)Cal:BOffset-SP PP NMS")
+	field(LNK6,"$(DEVICE_NAME)Cal:BGain-SP PP NMS")
+
+	field(DLY7,"1.00")
+	field(LNK7,"$(DEVICE_NAME)Cal:BOffset-SP PP NMS")
+	field(LNK8,"$(DEVICE_NAME)Cal:BGain-SP PP NMS")
+
+	field(DLY9,"1.00")
+	field(LNK9,"$(DEVICE_NAME)Cal:BOffset-SP PP NMS")
+	field(LNKA,"$(DEVICE_NAME)Cal:BGain-SP PP NMS")
+}
+
+record(seq,"$(DEVICE_NAME)CCalib_Set") {
+	field(SELM,"Mask")	
+	field(SELL,"$(DEVICE_NAME)Cal:dfanout.VAL NPP NMS")
+
+	field(DLY1,"1.50")
+	field(LNK1,"$(DEVICE_NAME)Cal:COffset-SP PP NMS")
+	field(LNK2,"$(DEVICE_NAME)Cal:CGain-SP PP NMS")
+
+	field(DLY3,"1.50")
+	field(LNK3,"$(DEVICE_NAME)Cal:COffset-SP PP NMS")
+	field(LNK4,"$(DEVICE_NAME)Cal:CGain-SP PP NMS")
+
+	field(DLY5,"1.50")
+	field(LNK5,"$(DEVICE_NAME)Cal:COffset-SP PP NMS")
+	field(LNK6,"$(DEVICE_NAME)Cal:CGain-SP PP NMS")
+
+	field(DLY7,"1.50")
+	field(LNK7,"$(DEVICE_NAME)Cal:COffset-SP PP NMS")
+	field(LNK8,"$(DEVICE_NAME)Cal:CGain-SP PP NMS")
+
+	field(DLY9,"1.50")
+	field(LNK9,"$(DEVICE_NAME)Cal:COffset-SP PP NMS")
+	field(LNKA,"$(DEVICE_NAME)Cal:CGain-SP PP NMS")
+}
+
+record(seq,"$(DEVICE_NAME)DCalib_Set") {
+	field(SELM,"Mask")		
+	field(SELL,"$(DEVICE_NAME)Cal:dfanout.VAL NPP NMS")
+
+	field(DLY1,"2.00")
+	field(LNK1,"$(DEVICE_NAME)Cal:DOffset-SP PP NMS")
+	field(LNK2,"$(DEVICE_NAME)Cal:DGain-SP PP NMS")
+
+	field(DLY3,"2.00")
+	field(LNK3,"$(DEVICE_NAME)Cal:DOffset-SP PP NMS")
+	field(LNK4,"$(DEVICE_NAME)Cal:DGain-SP PP NMS")
+
+	field(DLY5,"2.00")
+	field(LNK5,"$(DEVICE_NAME)Cal:DOffset-SP PP NMS")
+	field(LNK6,"$(DEVICE_NAME)Cal:DGain-SP PP NMS")
+
+	field(DLY7,"2.00")
+	field(LNK7,"$(DEVICE_NAME)Cal:DOffset-SP PP NMS")
+	field(LNK8,"$(DEVICE_NAME)Cal:DGain-SP PP NMS")
+
+	field(DLY9,"2.00")
+	field(LNK9,"$(DEVICE_NAME)Cal:DOffset-SP PP NMS")
+	field(LNKA,"$(DEVICE_NAME)Cal:DGain-SP PP NMS")
+}
+
+record(seq,"$(DEVICE_NAME)Calib_Check:seq") {
+	field(SELM,"All")	
+	field(SELL,"$(DEVICE_NAME)Cal:dfanout.VAL NPP NMS")
+	field(DLY1,"2.50")
+	field(LNK1,"$(DEVICE_NAME)Calib_Check:CHA PP NMS")
+	field(DLY2,"2.75")
+	field(LNK2,"$(DEVICE_NAME)Calib_Check:CHB PP NMS")
+	field(DLY3,"3.00")
+	field(LNK3,"$(DEVICE_NAME)Calib_Check:CHC PP NMS")
+	field(DLY4,"3.25")
+	field(LNK4,"$(DEVICE_NAME)Calib_Check:CHD PP NMS")
+
+	field(DLY5,"3.50")
+	field(LNK5,"$(DEVICE_NAME)Calib_Check:Test PP NMS")
+}
+
+record(calc, "$(DEVICE_NAME)Calib_Check:CHA") {
+	field(DESC, "Check if CHA calibration loaded")
+	field(CALC, "A#B?1:0")
+	field(INPA, "$(DEVICE_NAME)Cal:AGain-SP PP")
+	field(INPB, "$(DEVICE_NAME)Cal:AGain-I")
+}
+
+record(calc, "$(DEVICE_NAME)Calib_Check:CHB") {
+	field(DESC, "Check if CHB calibration loaded")
+	field(CALC, "A#B?1:0")
+	field(INPA, "$(DEVICE_NAME)Cal:BGain-SP PP")
+	field(INPB, "$(DEVICE_NAME)Cal:BGain-I")
+}
+
+record(calc, "$(DEVICE_NAME)Calib_Check:CHC") {
+	field(DESC, "Check if CHC calibration loaded")
+	field(CALC, "A#B?1:0")
+	field(INPA, "$(DEVICE_NAME)Cal:CGain-SP PP")
+	field(INPB, "$(DEVICE_NAME)Cal:CGain-I")
+}
+
+record(calc, "$(DEVICE_NAME)Calib_Check:CHD") {
+	field(DESC, "Check if CHD calibration loaded")
+	field(CALC, "A#B?1:0")
+	field(INPA, "$(DEVICE_NAME)Cal:DGain-SP PP")
+	field(INPB, "$(DEVICE_NAME)Cal:DGain-I")
+}
+
+record(calcout, "$(DEVICE_NAME)Calib_Check:Test") {
+	field(DESC, "Reload calibration if necessary")
+	field(CALC, "A+B+C+D=0?0:E")
+	field(INPA, "$(DEVICE_NAME)Calib_Check:CHA PP")
+	field(INPB, "$(DEVICE_NAME)Calib_Check:CHB PP")
+	field(INPC, "$(DEVICE_NAME)Calib_Check:CHC PP")
+	field(INPD, "$(DEVICE_NAME)Calib_Check:CHD PP")
+	field(INPE, "$(DEVICE_NAME)Gain:Level-SP")
+	field(OOPT, "When Non-zero")
+	field(OUT, "$(DEVICE_NAME)Gain:Level-SP PP")
+}
+
+# Flux Calibration
+record(longout, "$(DEVICE_NAME)Ampl:FluxCalFactor-SP") {
+	field(DESC, "Flux calibration factor")
+	field(DTYP, "PSC Single I32")
+   	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 175")
+   	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+# Control DAC-SET
+record(longout, "$(DEVICE_NAME)CtrlDAC:Test-SP") {
+	field(DESC, "Write raw bit input to CTRLDAC  ")
+	field(DTYP, "PSC Single I32")
+   	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 72")
+   	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(dfanout, "$(DEVICE_NAME)CtrlDAC:ALevelMax-SP") {
+	field(DESC, "DAC A Maximum voltage")
+	field(OUTA, "$(DEVICE_NAME)Fdbk:ACtrlMax-SP PP NMS")
+   	field(OUTB, "$(DEVICE_NAME)CtrlDAC:ALevel-SP.DRVH")
+}
+
+record(dfanout, "$(DEVICE_NAME)CtrlDAC:BLevelMax-SP") {
+	field(DESC, "DAC B Maximum voltage")
+	field(OUTA, "$(DEVICE_NAME)Fdbk:BCtrlMax-SP PP NMS")
+   	field(OUTB, "$(DEVICE_NAME)CtrlDAC:BLevel-SP.DRVH")
+}
+
+record(dfanout, "$(DEVICE_NAME)CtrlDAC:CLevelMax-SP") {
+	field(DESC, "DAC C Maximum voltage")
+	field(OUTA, "$(DEVICE_NAME)Fdbk:CiCtrlMax-SP PP NMS")
+   	field(OUTB, "$(DEVICE_NAME)CtrlDAC:CLevel-SP.DRVH")
+}
+
+record(dfanout, "$(DEVICE_NAME)CtrlDAC:DLevelMax-SP") {
+	field(DESC, "DAC D Maximum voltage")
+	field(OUTA, "$(DEVICE_NAME)Fdbk:DCtrlMax-SP PP NMS")
+  	field(OUTB, "$(DEVICE_NAME)CtrlDAC:DLevel-SP.DRVH")
+}
+
+record(dfanout, "$(DEVICE_NAME)CtrlDAC:ALevelMin-SP") {
+	field(DESC, "DAC A Minimum voltage")
+	field(OUTA, "$(DEVICE_NAME)Fdbk:ACtrlMin-SP PP NMS")
+   	field(OUTB, "$(DEVICE_NAME)CtrlDAC:ALevel-SP.DRVL")
+}
+
+record(dfanout, "$(DEVICE_NAME)CtrlDAC:BLevelMin-SP") {
+	field(DESC, "DAC B Minimum voltage")
+	field(OUTA, "$(DEVICE_NAME)Fdbk:BCtrlMin-SP PP NMS")
+   	field(OUTB, "$(DEVICE_NAME)CtrlDAC:BLevel-SP.DRVL")
+}
+
+record(dfanout, "$(DEVICE_NAME)CtrlDAC:CLevelMin-SP") {
+	field(DESC, "DAC C Minimum voltage")
+	field(OUTA, "$(DEVICE_NAME)Fdbk:CCtrlMin-SP PP NMS")
+   	field(OUTB, "$(DEVICE_NAME)CtrlDAC:CLevel-SP.DRVL")
+}
+
+record(dfanout, "$(DEVICE_NAME)CtrlDAC:DLevelMin-SP") {
+	field(DESC, "DAC D Minimum voltage")
+	field(OUTA, "$(DEVICE_NAME)Fdbk:DCtrlMix-SP PP NMS")
+   	field(OUTB, "$(DEVICE_NAME)CtrlDAC:DLevel-SP.DRVL")
+}
+
+record(ao, "$(DEVICE_NAME)CtrlDAC:ALevel-SP") {
+	field(DESC, "DAC A voltage level")
+	field(DTYP, "PSC Single I32")
+	field(ESLO, ".001")	
+	field(AOFF, "0") 		
+	field(LINR, "LINEAR")
+	field(PREC, "3")
+	field(DRVH, "10.000")
+	field(DRVL, "-10.000")
+ 	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 176")
+   	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(ao, "$(DEVICE_NAME)CtrlDAC:BLevel-SP") {
+	field(DESC, "DAC B voltage level")
+	field(DTYP, "PSC Single I32")
+	field(ESLO, ".001")	
+	field(AOFF, "0") 		
+	field(LINR, "LINEAR")
+	field(PREC, "3")
+	field(DRVH, "10.000")
+	field(DRVL, "-10.000")
+ 	field(OUT,  "@aie_tx_$(DEVICE_NAME) 1 177")
+  	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(ao, "$(DEVICE_NAME)CtrlDAC:CLevel-SP") {
+	field(DESC, "DAC C voltage level")
+	field(DTYP, "PSC Single I32")
+	field(ESLO, ".001") 	
+	field(AOFF, "0") 		
+	field(LINR, "LINEAR")
+	field(PREC, "3")
+	field(DRVH, "10.000")
+	field(DRVL, "-10.000")
+ 	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 178")
+   	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(ao, "$(DEVICE_NAME)CtrlDAC:DLevel-SP") {
+	field(DESC, "DAC D voltage level")
+	field(DTYP, "PSC Single I32")
+	field(ESLO, ".001") 	
+	field(AOFF, "0") 		
+	field(LINR, "LINEAR")
+	field(PREC, "3")
+	field(DRVH, "10.000")
+	field(DRVL, "-10.000")
+ 	field(OUT,  "@aie_tx_$(DEVICE_NAME) 1 179")
+   	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(bo, "$(DEVICE_NAME)CtrlDAC:LDAC-SP") {
+	field(DESC, "DAC latch")
+	field(DTYP, "PSC Single U32")
+	field(OUT , "@aie_tx_$(DEVICE_NAME) 1 73")
+   	field(ZNAM, "Low")
+   	field(ONAM, "High")
+	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+#FEEDBACK-SET
+
+#Proportional constants
+record(longout, "$(DEVICE_NAME)Fdbk:AKp-SP") {
+   	field(DESC, "DAC A Proportional feedback constant")
+   	field(DTYP, "PSC Single I32")
+   	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 136")
+   	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(longout, "$(DEVICE_NAME)Fdbk:BKp-SP") {
+  	field(DESC, "DAC B Proportional feedback constant")
+   	field(DTYP, "PSC Single I32")
+  	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 137")
+  	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(longout, "$(DEVICE_NAME)Fdbk:CKp-SP") {
+  	field(DESC, "DAC C Proportional feedback constant")
+  	field(DTYP, "PSC Single I32")
+  	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 138")
+  	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(longout, "$(DEVICE_NAME)Fdbk:DKp-SP") {
+   	field(DESC, "DAC D Proportional feedback constant")
+   	field(DTYP, "PSC Single I32")
+   	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 139")
+  	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+#Integral constants
+record(longout, "$(DEVICE_NAME)Fdbk:AKi-SP") {
+   	field(DESC, "DAC A Integral feedback constant")
+  	field(DTYP, "PSC Single I32")
+  	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 140")
+   	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(longout, "$(DEVICE_NAME)Fdbk:BKi-SP") {
+  	field(DESC, "DAC B Integral feedback constant")
+ 	field(DTYP, "PSC Single I32")
+  	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 141")
+   	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(longout, "$(DEVICE_NAME)Fdbk:CKi-SP") {
+  	field(DESC, "DAC C Integral feedback constant")
+ 	field(DTYP, "PSC Single I32")
+  	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 142")
+  	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(longout, "$(DEVICE_NAME)Fdbk:DKi-SP") {
+  	field(DESC, "DAC D Integral feedback constant")
+  	field(DTYP, "PSC Single I32")
+  	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 143")
+  	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+#Derivative constants
+record(longout, "$(DEVICE_NAME)Fdbk:AKd-SP") {
+  	field(DESC, "DAC A Derivative feedback constant")
+  	field(DTYP, "PSC Single I32")
+  	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 144")
+  	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(longout, "$(DEVICE_NAME)Fdbk:BKd-SP") {
+  	field(DESC, "DAC B Derivative feedback constant")
+  	field(DTYP, "PSC Single I32")
+  	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 145")
+  	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(longout, "$(DEVICE_NAME)Fdbk:CKd-SP") {
+ 	field(DESC, "DAC C Derivative feedback constant")
+  	field(DTYP, "PSC Single I32")
+  	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 146")
+  	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(longout, "$(DEVICE_NAME)Fdbk:DKd-SP") {
+   	field(DESC, "DAC D Derivative feedback constant")
+   	field(DTYP, "PSC Single I32")
+  	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 147")
+  	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+#Feedback loop enabling
+record(ao, "$(DEVICE_NAME)Fdbk:AutoDisableLevel-SP") {
+	field(DESC, "Feedback disable level")
+	field(OMSL, "supervisory")
+	field(PREC, "2")
+	field(HOPR, 10.00)
+  	field(LOPR, 0)
+	field(FLNK, "$(DEVICE_NAME)Fdbk:dfanoutdisable")
+}
+
+record(dfanout, "$(DEVICE_NAME)Fdbk:dfanoutdisable"){
+	field(OMSL,"closed_loop")
+	field(DOL, "$(DEVICE_NAME)Fdbk:AutoDisableLevel-SP PP")
+	field(OUTA, "$(DEVICE_NAME)Fdbk:AAutoDisable")
+	field(OUTB, "$(DEVICE_NAME)Fdbk:BAutoDisable")
+	field(OUTC, "$(DEVICE_NAME)Fdbk:CurrThresh")
+}
+
+#record(calcout, "$(DEVICE_NAME)Fdbk:AAutoDisable") {
+#	field(DESC, "Disable feedback when signal is low")
+#	field(SCAN, "Passive") 
+#	field(CALC, "((ABS(A)<((B/100)*520000))&&(!C))?0:1")
+#	field(INPA, "$(DEVICE_NAME)Ampl:dfanout PP")
+#	field(INPB, "$(DEVICE_NAME)Fdbk:dfanoutdisable")
+#	field(INPC, "$(DEVICE_NAME)Fdbk:AAutoReenable")
+#	field(OOPT, "When Zero")
+#	field(OUT, "$(DEVICE_NAME)Fdbk:AEn-SP PP")
+#}
+
+#record(calcout, "$(DEVICE_NAME)Fdbk:AAutoReenable") {
+#		field(DESC, "Re-enable feedback if selected")
+#		field(SCAN, "Passive")
+#		field(CALC, "((B==1)&&(ABS(C)>=((D/100)*520000)))?1:0")
+#		field(INPA, "$(DEVICE_NAME)Fdbk:AAutoDisable")
+#		field(INPB, "$(DEVICE_NAME)Fdbk:Reenable")
+#		field(INPC, "$(DEVICE_NAME)Ampl:dfanout PP")
+#		field(INPD, "$(DEVICE_NAME)Fdbk:dfanoutdisable")
+#		field(OUT, "$(DEVICE_NAME)Fdbk:AEn-SP PP")
+#		field(OOPT, "When Non-zero")
+#}
+
+record(bo, "$(DEVICE_NAME)Fdbk:Reenable") {
+	   field(DESC, "Flag for automatic reenable")
+}
+
+record(bo, "$(DEVICE_NAME)Fdbk:LvdsEn") {
+	   field(DESC, "Flag to enable LVDS actions")
+}
+	   
+#record(calcout, "$(DEVICE_NAME)Fdbk:BAutoDisable") {
+#	field(DESC, "Disable feedback when signal is low")
+#	field(SCAN, "Passive") 
+#	field(CALC, "ABS(A)<((B/100)*520000)?0:1")	
+#	field(INPA, "$(DEVICE_NAME)Ampl:dfanout PP")
+#	field(INPB, "$(DEVICE_NAME)Fdbk:dfanoutdisable")
+#	field(OOPT, "When Zero")
+#	field(OUT, "$(DEVICE_NAME)Fdbk:BEn-SP PP")
+#}
+
+record(bo, "$(DEVICE_NAME)Fdbk:AEn-SP") {
+	field(DESC, "DAC A feedback enable")
+	field(SCAN, "1 second")
+	field(DTYP, "PSC Single U32")
+	field(OUT , "@aie_tx_$(DEVICE_NAME) 1 148")
+  	field(ZNAM, "OFF")
+   	field(ONAM, "ON")
+	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(calcout, "$(DEVICE_NAME)Fdbk:CurrThresh")
+{
+	field(DESC, "Calculate when current below threshold")
+	field(SCAN, "Passive") 
+	field(CALC, "ABS(A)<((B/100)*520000)?0:1")	
+	field(INPA, "$(DEVICE_NAME)Ampl:dfanout PP")
+	field(INPB, "$(DEVICE_NAME)Fdbk:dfanoutdisable PP")
+	field(OOPT, "Every Time")
+	field(OUT, "$(DEVICE_NAME)Fdbk:dfanoutCT PP")
+	field(FLNK, "$(DEVICE_NAME)Fdbk:dfanoutCT.PROC")
+}
+
+record(dfanout, "$(DEVICE_NAME)Fdbk:dfanoutCT")
+{		
+	field(SCAN,"Passive")
+	field(SELM,"All")
+	field(OMSL,"closed_loop")
+	field(DOL,"$(DEVICE_NAME)Fdbk:CurrThresh PP")
+	field(OUTA,"$(DEVICE_NAME)Fdbk:SigHigh PP")
+	field(OUTB,"$(DEVICE_NAME)Leds-SP PP")
+}
+
+record(bo, "$(DEVICE_NAME)Fdbk:SigHigh") {
+	   field(DESC, "Temp PV to simulate signal level")
+}
+record(bo, "$(DEVICE_NAME)Fdbk:BEn-SP") {
+	field(DESC, "DAC B feedback enable")
+	field(SCAN, "1 second")
+	field(DTYP, "PSC Single U32")
+	field(OUT , "@aie_tx_$(DEVICE_NAME) 1 149")
+   	field(ZNAM, "OFF")
+   	field(ONAM, "ON")
+	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(bo, "$(DEVICE_NAME)Fdbk:CEn-SP") {
+	field(DESC, "DAC C feedback enable")
+	field(DTYP, "PSC Single U32")
+	field(OUT , "@aie_tx_$(DEVICE_NAME) 1 150")
+   	field(ZNAM, "OFF")
+   	field(ONAM, "ON")
+	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(bo, "$(DEVICE_NAME)Fdbk:DEn-SP") {
+	field(DESC, "DAC D feedback enable")
+	field(DTYP, "PSC Single U32")
+	field(OUT , "@aie_tx_$(DEVICE_NAME) 1 151")
+   	field(ZNAM, "OFF")
+   	field(ONAM, "ON")
+	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+#Feedback loop setpoints
+record(ao, "$(DEVICE_NAME)Fdbk:A-SP") {
+   	field(DESC, "DAC A feedback setpoint")
+   	field(DTYP, "PSC Single I32")
+   	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 152")
+	field(ESLO, ".001")	
+	field(LINR, "LINEAR")
+	field(PREC, "3")
+	field(HOPR, "3000")
+	field(LOPR, "-3000")
+   	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(ao, "$(DEVICE_NAME)Fdbk:B-SP") {
+   	field(DESC, "DAC B feedback setpoint")
+   	field(DTYP, "PSC Single I32")
+   	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 153")
+	field(ESLO, ".001")	
+	field(LINR, "LINEAR")
+	field(PREC, "3")
+	field(HOPR, "3000")
+	field(LOPR, "-3000")
+   	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(ao, "$(DEVICE_NAME)Fdbk:C-SP") {
+   	field(DESC, "DAC C feedback setpoint")
+   	field(DTYP, "PSC Single I32")
+   	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 154")
+	field(ESLO, ".001")	
+	field(LINR, "LINEAR")
+	field(PREC, "3")
+	field(HOPR, "3000")
+	field(LOPR, "-3000")
+   	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(ao, "$(DEVICE_NAME)Fdbk:D-SP") {
+   	field(DESC, "DAC D feedback setpoint")
+  	field(DTYP, "PSC Single I32")
+   	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 155")
+	field(ESLO, ".001")	
+	field(LINR, "LINEAR")
+	field(PREC, "3")
+	field(HOPR, "3000")
+	field(LOPR, "-3000")
+        field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(mbbo, "$(DEVICE_NAME)Fdbk:rate-SP"){
+   	field(DESC, "Feedback rate")
+	field(DTYP, "PSC Single U32")
+  	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 156")
+  	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")  
+  	field(ZRST, "0.1 Hz")
+   	field(ZRVL, "10000")
+  	field(ONST, "0.2 Hz")
+ 	field(ONVL, "5000")
+  	field(TWST, "0.5 Hz")
+   	field(TWVL, "2000")
+   	field(THST, "1 Hz")
+   	field(THVL, "1000")
+   	field(FRST, "2 Hz")
+  	field(FRVL, "500")
+	field(FRST, "5 Hz")
+  	field(FRVL, "200")
+	field(FVST, "10 Hz")
+	field(FVVL, "100")
+	field(SXST, "25 Hz")
+	field(SXVL, "40")
+	field(SVST, "50 Hz")
+	field(SVVL, "20")
+	field(EIST, "100 Hz")
+	field(EIVL, "10")
+ 	field(NIST, "125 Hz")
+ 	field(NIVL, "8")
+	field(TEST, "200 Hz")
+ 	field(TEVL, "5")
+}
+
+record(ao, "$(DEVICE_NAME)Fdbk:delT-SP") {
+	field(DESC, "Feedback loop period")	
+    field(DTYP, "PSC Single I32")
+	field(ESLO, ".001")	
+	field(AOFF, "0") 		
+	field(LINR, "LINEAR")
+	field(PREC, "3")
+	field(LOPR, "0")
+	field(DRVL, "0")
+ 	field(OUT,  "@aie_tx_$(DEVICE_NAME) 1 156")
+    field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(ao, "$(DEVICE_NAME)Fdbk:ACtrlMax-SP") {
+   	field(DESC, "DAC A Output maximum voltage")
+  	field(DTYP, "PSC Single I32")
+  	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 157")
+ 	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(longout,"$(DEVICE_NAME)Fdbk:BCtrlMax-SP") {
+   	field(DESC, "DAC B Output maximum voltage")
+  	field(DTYP, "PSC Single I32")
+ 	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 158")
+   	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(longout, "$(DEVICE_NAME)Fdbk:CCtrlMax-SP") {
+  	field(DESC, "DAC c Output maximum voltage")
+  	field(DTYP, "PSC Single I32")
+  	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 159")
+ 	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(longout, "$(DEVICE_NAME)Fdbk:DCtrlMax-SP") {
+  	field(DESC, "DAC D Output maximum voltage")
+ 	field(DTYP, "PSC Single I32")
+  	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 160")
+  	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(longout, "$(DEVICE_NAME)Fdbk:ACtrlMin-SP") {
+  	field(DESC, "DAC A Output maximum voltage")
+   	field(DTYP, "PSC Single I32")
+  	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 161")
+   	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(longout, "$(DEVICE_NAME)Fdbk:BCtrlMin-SP") {
+  	field(DESC, "DAC B Output maximum voltage")
+  	field(DTYP, "PSC Single I32")
+   	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 162")
+  	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(longout, "$(DEVICE_NAME)Fdbk:CCtrlMin-SP") {
+	field(DESC, "DAC C Output maximum voltage")
+ 	field(DTYP, "PSC Single I32")
+ 	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 163")
+  	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(longout, "$(DEVICE_NAME)Fdbk:DCtrlMin-SP") {
+ 	field(DESC, "DAC D Output maximum voltage")
+ 	field(DTYP, "PSC Single I32")
+	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 164")
+	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(longout, "$(DEVICE_NAME)Fdbk:AIntMax-SP") {
+  	field(DESC, "DAC A maximum integral voltage out")
+	field(DTYP, "PSC Single I32")
+  	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 165")
+  	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(longout, "$(DEVICE_NAME)Fdbk:BIntMax-SP") {
+  	field(DESC, "DAC B maximum integral voltage out")
+	field(DTYP, "PSC Single I32")
+ 	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 166")
+  	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(longout, "$(DEVICE_NAME)Fdbk:CIntMax-SP") {
+	field(DESC, "DAC C maximum integral voltage out")
+  	field(DTYP, "PSC Single I32")
+	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 167")
+  	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(longout, "$(DEVICE_NAME)Fdbk:DIntMax-SP") {
+  	field(DESC, "DAC D maximum integral voltage out")
+  	field(DTYP, "PSC Single I32")
+    field(OUT, "@aie_tx_$(DEVICE_NAME) 1 168")
+   	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(longout, "$(DEVICE_NAME)Fdbk:ACtrlScaleFactor-SP") {
+   	field(DESC, "DAC A Output scaling factor")
+   	field(DTYP, "PSC Single I32")
+	field(HOPR, 1000000000)	
+	field(LOPR, 1)
+   	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 169")
+   	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(longout, "$(DEVICE_NAME)Fdbk:BCtrlScaleFactor-SP") {
+ 	field(DESC, "DAC B Output scaling factor")
+  	field(DTYP, "PSC Single I32")
+	field(HOPR, 1000000000)	
+	field(LOPR, 1)
+  	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 170")
+ 	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(longout, "$(DEVICE_NAME)Fdbk:CCtrlScaleFactor-SP") {
+  	field(DESC, "DAC C Output scaling factor")
+  	field(DTYP, "PSC Single I32")
+    field(OUT, "@aie_tx_$(DEVICE_NAME) 1 171")
+   	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(longout, "$(DEVICE_NAME)Fdbk:DCtrlScaleFactor-SP") {
+  	field(DESC, "DAC D Output scaling factor")
+  	field(DTYP, "PSC Single I32")
+	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 172")
+  	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+#CALIBRATION DAC
+record(longout, "$(DEVICE_NAME)CalDAC:Current-SP") {
+ 	field(DESC, "Calib DAC Current(17-16=addr,15-0=val)")
+	field(DTYP, "PSC Single I32")
+	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 32")
+ 	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(longout, "$(DEVICE_NAME)CalDAC:Reset-SP") {
+  	field(DESC, "Calibration DAC reset(0=reset, 2=active)")
+  	field(DTYP, "PSC Single I32")
+ 	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 33")
+  	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(longout, "$(DEVICE_NAME)CalDAC:EnbSw-SP") {
+ 	field(DESC, "Calibration DAC Enable Switches")
+  	field(DTYP, "PSC Single I32")
+   	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 37")
+   	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+#FAST ACQUISITION
+#Soft Trigger for DDR
+
+record(longout, "$(DEVICE_NAME)Trig:Dly-SP") {
+   	field(DESC, "Trigger delay")
+   	field(DTYP, "PSC Single I32")
+	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 56")
+   	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(ao, "$(DEVICE_NAME)Trig:EventNum-SP") {
+   	field(DESC, "Trigger event ID")
+   	field(DTYP, "PSC Single I32")
+	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 57")
+   	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(ao, "$(DEVICE_NAME)FaSoftTrig-SP") {
+  	field(DESC, "FA Trigger")
+  	field(DTYP, "PSC Single I32")
+  	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 130")
+ 	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+record(ao, "$(DEVICE_NAME)Trig:NumSamples-SP") {
+   	field(DESC, "Number of samples to gather")
+    field(DTYP, "PSC Single I32")
+	field(DRVH,"520000")
+	field(DRVL,"0")
+	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 131")
+   	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
+}
+
+################################################################
+# 10 Hz Readback/Status
+#    Rx (message id, address)
+#
+#################################################################
+
+#DEBUG-GET
+record(longin, "$(DEVICE_NAME)HeartBeat10Hz-I") {
+   	field(DESC, "10 Hz Heartbeat - Comm. OK counter")
+  	field(DTYP, "PSC Reg")
+   	field(INP, "@Rx$(DEVICE_NAME) 30 0")
+   	field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(DEVICE_NAME)Leds-I") {
+	field(DESC, "Debug LEDS Readback")
+	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 4")
+   	field(SCAN,"I/O Intr")
+}
+
+#POSITION-GET
+record(ai, "$(DEVICE_NAME)Pos:Kx-I") {
+	field(DESC,"Horizontal position calibration constant")
+	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 8")
+	field(SCAN,"I/O Intr")
+	field(EGU, "nm")
+}
+
+record(ai, "$(DEVICE_NAME)Pos:Ky-I") {
+	field(DESC,"Vertical position calibration constant")
+	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 12")
+	field(SCAN,"I/O Intr")
+	field(EGU, "nm")
+}
+
+#ADC COUNTS-GET
+record(ai, "$(DEVICE_NAME)Ampl:AAvg-I") {
+	field(DESC,"Channel A ADC counts")
+	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 16")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "ADC Counts")
+	field(FLNK,"$(DEVICE_NAME)Ampl:CountsTotal-I")	
+}
+
+record(ai, "$(DEVICE_NAME)Ampl:BAvg-I") {
+	field(DESC,"Channel B ADC counts")
+	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 20")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "ADC Counts")
+	field(FLNK,"$(DEVICE_NAME)Ampl:CountsTotal-I")
+}
+
+record(ai, "$(DEVICE_NAME)Ampl:CAvg-I") {
+	field(DESC,"Channel C ADC counts")
+	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 24")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "ADC Counts")
+	field(FLNK,"$(DEVICE_NAME)Ampl:CountsTotal-I")
+}
+
+record(ai, "$(DEVICE_NAME)Ampl:DAvg-I") {
+	field(DESC,"Channel D ADC counts")
+	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 28")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "ADC Counts")	
+	field(FLNK,"$(DEVICE_NAME)Ampl:CountsTotal-I")	
+}
+
+record(calcout,"$(DEVICE_NAME)Ampl:CountsTotal-I") {
+	field(DESC,"Total ADC Counts")
+	field(SCAN,"Passive") 
+	field(CALC,"A+B+C+D")
+	field(INPA,"$(DEVICE_NAME)Ampl:AAvg-I.VAL PP")
+	field(INPB,"$(DEVICE_NAME)Ampl:BAvg-I.VAL PP")
+	field(INPC,"$(DEVICE_NAME)Ampl:CAvg-I.VAL PP")
+	field(INPD,"$(DEVICE_NAME)Ampl:DAvg-I.VAL PP")
+	field(EGU, "ADC Counts")
+	field(OOPT,"Every Time" )
+	field(OUT,"$(DEVICE_NAME)Ampl:dfanout PP")
+}
+
+record(dfanout,"$(DEVICE_NAME)Ampl:dfanout"){
+	field(SCAN,"Passive")
+	field(SELM,"All")
+	field(OMSL,"closed_loop")
+	field(DOL,"$(DEVICE_NAME)Ampl:CountsTotal-I PP")	
+	field(OUTA,"$(DEVICE_NAME)Fdbk:AAutoDisable PP")
+	field(OUTB,"$(DEVICE_NAME)Fdbk:BAutoDisable PP")
+	field(OUTC,"$(DEVICE_NAME)Fdbk:CurrThresh PP")
+}
+
+#TODO
+
+#POSITION-GET
+record(ai, "$(DEVICE_NAME)Pos:X-I") {
+	field(DESC,"10 Hz X position")
+	field(DTYP, "PSC Reg F32")
+	field(INP , "@Rx$(DEVICE_NAME) 30 32")	
+	field(PREC,"3")	
+	field(SCAN,"I/O Intr")
+	field(EGU,  "um")	
+}
+
+record(ai, "$(DEVICE_NAME)Pos:Y-I") {
+	field(DESC,"10 Hz Y position")
+	field(DTYP, "PSC Reg F32")
+	field(INP , "@Rx$(DEVICE_NAME) 30 36")
+	field(PREC,"3")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "um")
+}
+
+#MISC-GET
+record(ai, "$(DEVICE_NAME)SockLivetime-I") {
+	field(DESC,"TCP socket connection monitor")
+	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 40")
+	field(SCAN,"I/O Intr")
+}
+
+record(ai, "$(DEVICE_NAME)FWVersion-I") {
+	field(DESC,"Firmware version")
+	field(DTYP, "PSC Reg F32")
+	field(INP , "@Rx$(DEVICE_NAME) 30 44")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "Version")	
+        field(PREC,"1")
+}
+
+#CURRENTS-GET
+record(ai, "$(DEVICE_NAME)Ampl:ACurrAvg-I") {
+	field(DESC,"Channel A current")
+	field(DTYP, "PSC Reg F32")
+	field(INP , "@Rx$(DEVICE_NAME) 30 48")
+	field(LINR,"LINEAR")
+	field(PREC,"3")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "uA")	
+	field(FLNK,"$(DEVICE_NAME)Ampl:CurrTotal-I")		
+}
+
+record(ai, "$(DEVICE_NAME)Ampl:BCurrAvg-I") {
+	field(DESC,"Channel B current")
+	field(DTYP, "PSC Reg F32")
+	field(INP , "@Rx$(DEVICE_NAME) 30 52")
+	field(LINR,"LINEAR")
+	field(PREC,"3")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "uA")	
+	field(FLNK,"$(DEVICE_NAME)Ampl:CurrTotal-I")	
+}
+
+record(ai, "$(DEVICE_NAME)Ampl:CCurrAvg-I") {
+	field(DESC,"Channel C current")
+	field(DTYP, "PSC Reg F32")
+	field(INP , "@Rx$(DEVICE_NAME) 30 56")
+	field(LINR,"LINEAR")
+	field(PREC,"3")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "uA")	
+	field(FLNK,"$(DEVICE_NAME)Ampl:CurrTotal-I")
+}
+
+record(ai, "$(DEVICE_NAME)Ampl:DCurrAvg-I") {
+	field(DESC,"Channel D current")
+	field(DTYP, "PSC Reg F32")
+	field(INP , "@Rx$(DEVICE_NAME) 30 60")
+	field(LINR,"LINEAR")
+	field(PREC,"3")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "uA")
+	field(FLNK,"$(DEVICE_NAME)Ampl:CurrTotal-I")	
+}
+
+record(calcout,"$(DEVICE_NAME)Ampl:CurrTotal-I") {
+	field(DESC,"Total Current")
+	field(SCAN,"Passive") 
+	field(CALC,"A+B+C+D")
+	field(INPA,"$(DEVICE_NAME)Ampl:ACurrAvg-I.VAL PP")
+	field(INPB,"$(DEVICE_NAME)Ampl:BCurrAvg-I.VAL PP")
+	field(INPC,"$(DEVICE_NAME)Ampl:CCurrAvg-I.VAL PP")
+	field(INPD,"$(DEVICE_NAME)Ampl:DCurrAvg-I.VAL PP")
+	field(PREC,"3")
+	field(EGU, "uA")
+	field(OOPT,"Every Time" )
+	field(OUT,"$(DEVICE_NAME)Ampl:Flux-I PP")
+}
+
+#FLUX-GET
+record(calc,"$(DEVICE_NAME)Ampl:Flux-I") {
+	field(DESC,"Total Current")
+	field(SCAN,"Passive") 
+	field(CALC,"A*B")
+	field(INPA,"$(DEVICE_NAME)Ampl:FluxCalFactor-I.VAL")
+	field(INPB,"$(DEVICE_NAME)Ampl:CurrTotal-I.VAL PP")
+	field(PREC,"3")
+	field(EGU, "ph/sec")
+}
+
+record(ai,"$(DEVICE_NAME)Bias:Out-I") {
+	field(DESC,"Output bias measurement")
+	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 168")
+	field(EGU,  "V")	
+	field(LINR,"LINEAR")
+	field(PREC,"1")
+	field(SCAN,"I/O Intr")
+}
+
+#OFFSETS-GET
+record(ai,"$(DEVICE_NAME)Cal:AOffset-I") {
+	field(DESC,"Channel A ADC count offset")
+	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 64")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "ADC Counts")	
+}
+
+record(ai, "$(DEVICE_NAME)Cal:BOffset-I") {
+	field(DESC,"Channel B ADC count offset")
+	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 68")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "ADC Counts")	
+}
+
+record(ai, "$(DEVICE_NAME)Cal:COffset-I") {
+	field(DESC,"Channel C ADC count offset")
+	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 72")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "ADC Counts")
+}
+
+record(ai, "$(DEVICE_NAME)Cal:DOffset-I") {
+	field(DESC,"Channel D ADC count offset")
+	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 76")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "ADC Counts")
+}
+
+#GAIN-GET
+record(ai, "$(DEVICE_NAME)Cal:AGain-I") {
+	field(DESC,"Channel A gain")
+	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 80")
+	field(SCAN,"I/O Intr")
+}
+
+record(ai, "$(DEVICE_NAME)Cal:BGain-I") {
+	field(DESC,"Channel B gain")
+	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 84")
+	field(SCAN,"I/O Intr")
+}
+
+record(ai, "$(DEVICE_NAME)Cal:CGain-I") {
+	field(DESC,"Channel C gain")
+	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 88")
+	field(SCAN,"I/O Intr")
+}
+
+record(ai, "$(DEVICE_NAME)Cal:DGain-I") {
+	field(DESC,"Channel D gain")
+	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 92")
+	field(SCAN,"I/O Intr")
+}
+
+#FEEDBACK-GET
+
+#Proportional constants
+record(ai, "$(DEVICE_NAME)Fdbk:AKp-I") {
+	field(DESC,"Kp feedback constant on chan A")
+	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 172")
+	field(SCAN,"I/O Intr")
+}
+
+record(ai, "$(DEVICE_NAME)Fdbk:BKp-I") {
+	field(DESC,"Kp feedback constant on chan B")
+	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 176")
+	field(SCAN,"I/O Intr")
+}
+
+record(ai, "$(DEVICE_NAME)Fdbk:CKp-I") {
+	field(DESC,"Kp feedback constant on chan C")
+	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 180")
+	field(SCAN,"I/O Intr")
+}
+
+record(ai, "$(DEVICE_NAME)Fdbk:DKp-I") {
+	field(DESC,"Kp feedback constant on chan C")
+	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 184")
+	field(SCAN,"I/O Intr")
+}
+
+#Integral constants
+record(ai, "$(DEVICE_NAME)Fdbk:AKi-I") {
+	field(DESC,"Ki feedback constant on chan A")
+	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 188")
+	field(SCAN,"I/O Intr")
+}
+
+record(ai, "$(DEVICE_NAME)Fdbk:BKi-I") {
+	field(DESC,"Ki feedback constant on chan A")
+	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 192")
+	field(SCAN,"I/O Intr")
+}
+
+record(ai, "$(DEVICE_NAME)Fdbk:CKi-I") {
+	field(DESC,"Ki feedback constant on chan A")
+	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 196")
+	field(SCAN,"I/O Intr")
+}
+
+record(ai, "$(DEVICE_NAME)Fdbk:DKi-I") {
+	field(DESC,"Ki feedback constant on chan A")
+	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 200")
+	field(SCAN,"I/O Intr")
+}
+
+#Derivative constants
+record(ai, "$(DEVICE_NAME)Fdbk:AKd-I") {
+	field(DESC,"Kd feedback constant on chan A")
+	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 204")
+	field(SCAN,"I/O Intr")
+}
+
+record(ai, "$(DEVICE_NAME)Fdbk:BKd-I") {
+	field(DESC,"Kd feedback constant on chan B")
+	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 208")
+	field(SCAN,"I/O Intr")
+}
+
+record(ai, "$(DEVICE_NAME)Fdbk:CKd-I") {
+	field(DESC,"Kd feedback constant on chan C")
+	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 212")
+	field(SCAN,"I/O Intr")
+}
+
+record(ai, "$(DEVICE_NAME)Fdbk:DKd-I") {
+	field(DESC,"Kd feedback constant on chan D")
+	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 216")
+	field(SCAN,"I/O Intr")
+}
+
+#Feedback loop enabling
+record(bi, "$(DEVICE_NAME)Fdbk:AEn-I") {
+	field(DESC, "Enable feedback on control DAC chan A")
+	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 220")
+	field(SCAN,"I/O Intr")
+}
+
+record(bi, "$(DEVICE_NAME)Fdbk:BEn-I") {
+	field(DESC, "Enable feedback on control DAC chan B")
+	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 224")
+	field(SCAN,"I/O Intr")
+}
+
+record(bi, "$(DEVICE_NAME)Fdbk:CEn-I") {
+	field(DESC, "Enable feedback on control DAC chan C")
+	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 228")
+	field(SCAN,"I/O Intr")
+}
+
+record(bi, "$(DEVICE_NAME)Fdbk:DEn-I") {
+	field(DESC, "Enable feedback on control DAC chan D")
+	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 232")
+	field(SCAN,"I/O Intr")
+}
+
+#Feedback setpoints
+record(ai, "$(DEVICE_NAME)Fdbk:A-I") {
+	field(DESC,"Setpoint for chan A")
+	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 236")
+	field(SCAN, "I/O Intr")
+	field(EGU,  "um")	
+	field(LINR,"LINEAR")
+	field(ESLO,".001")
+	field(PREC,"3")	
+}
+
+record(ai, "$(DEVICE_NAME)Fdbk:B-I") {
+	field(DESC,"Setpoint for chan b")
+	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 240")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "um")	
+	field(LINR,"LINEAR")
+	field(ESLO,".001")
+	field(PREC,"3")
+}
+
+record(ai, "$(DEVICE_NAME)Fdbk:C-I") {
+	field(DESC,"Setpoint for chan C")
+	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 244")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "um")	
+	field(LINR,"LINEAR")
+	field(ESLO,".001")
+	field(PREC,"3")
+}
+
+record(ai, "$(DEVICE_NAME)Fdbk:D-I") {
+	field(DESC,"Setpoint for chan D")
+	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 248")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "um")	
+	field(LINR,"LINEAR")
+	field(ESLO,".001")
+	field(PREC,"3")
+}
+
+#Feedback loop period
+record(ai, "$(DEVICE_NAME)Fdbk:delT-I") {
+	field(DESC,"Feedback loop period")
+	field(DTYP, "PSC Reg F32")
+	field(INP , "@Rx$(DEVICE_NAME) 30 252")
+	field(SCAN,"I/O Intr")
+}
+
+record(ai, "$(DEVICE_NAME)Fdbk:ACtrlMax-I") {
+   	field(DESC, "DAC A Output maximum voltage")
+   	field(DTYP, "PSC Reg")
+   	field(INP , "@Rx$(DEVICE_NAME) 30 256")
+	field(SCAN,"I/O Intr")
+}
+
+record(ai, "$(DEVICE_NAME)Fdbk:BCtrlMax-I") {
+  	field(DESC, "DAC B Output maximum voltage")
+   	field(DTYP, "PSC Reg")
+   	field(INP , "@Rx$(DEVICE_NAME) 30 260")
+	field(SCAN,"I/O Intr")
+}
+
+record(ai, "$(DEVICE_NAME)Fdbk:CCtrlMax-I") {
+   	field(DESC, "DAC c Output maximum voltage")
+   	field(DTYP, "PSC Reg")
+   	field(INP , "@Rx$(DEVICE_NAME) 30 264")
+	field(SCAN,"I/O Intr")
+}
+
+record(ai, "$(DEVICE_NAME)Fdbk:DCtrlMax-I") {
+   	field(DESC, "DAC D Output maximum voltage")
+   	field(DTYP, "PSC Reg")
+   	field(INP , "@Rx$(DEVICE_NAME) 30 268")
+	field(SCAN,"I/O Intr")
+}
+
+record(ai, "$(DEVICE_NAME)Fdbk:ACtrlMin-I") {
+   	field(DESC, "DAC A Output maximum voltage")
+   	field(DTYP, "PSC Reg")
+   	field(INP , "@Rx$(DEVICE_NAME) 30 272")
+	field(SCAN,"I/O Intr")
+}
+
+record(ai, "$(DEVICE_NAME)Fdbk:BCtrlMin-I") {
+  	field(DESC, "DAC B Output maximum voltage")
+  	field(DTYP, "PSC Reg")
+  	field(INP , "@Rx$(DEVICE_NAME) 30 276")
+	field(SCAN,"I/O Intr")
+}
+
+record(ai, "$(DEVICE_NAME)Fdbk:CCtrlMin-I") {
+  	field(DESC, "DAC C Output maximum voltage")
+ 	field(DTYP, "PSC Reg")
+ 	field(INP , "@Rx$(DEVICE_NAME) 30 280")
+	field(SCAN,"I/O Intr")
+}
+
+record(ai, "$(DEVICE_NAME)Fdbk:DCtrlMin-I") {
+    field(DESC, "DAC D Output maximum voltage")
+   	field(DTYP, "PSC Reg")
+   	field(INP , "@Rx$(DEVICE_NAME) 30 284")
+	field(SCAN,"I/O Intr")
+}
+
+record(ai, "$(DEVICE_NAME)Fdbk:AIntMax-I") {
+   	field(DESC, "DAC A Output maximum voltage")
+  	field(DTYP, "PSC Reg")
+  	field(INP , "@Rx$(DEVICE_NAME) 30 288")
+	field(SCAN,"I/O Intr")
+}
+
+record(ai, "$(DEVICE_NAME)Fdbk:BIntMax-I") {
+  	field(DESC, "DAC B Output maximum voltage")
+ 	field(DTYP, "PSC Reg")
+ 	field(INP , "@Rx$(DEVICE_NAME) 30 292")
+	field(SCAN,"I/O Intr")
+}
+
+record(ai, "$(DEVICE_NAME)Fdbk:CIntMax-I") {
+   	field(DESC, "DAC C Output maximum voltage")
+  	field(DTYP, "PSC Reg")
+   	field(INP , "@Rx$(DEVICE_NAME) 30 296")
+	field(SCAN,"I/O Intr")
+}
+
+record(ai, "$(DEVICE_NAME)Fdbk:DIntMax-I") {
+    field(DESC, "DAC D Output maximum voltage")
+   	field(DTYP, "PSC Reg")
+  	field(INP , "@Rx$(DEVICE_NAME) 30 300")
+	field(SCAN,"I/O Intr")
+}
+
+record(ai, "$(DEVICE_NAME)Fdbk:ACtrlScaleFactor-I") {
+   	field(DESC, "DAC A Output scaling factor")
+   	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 304")
+	field(SCAN,"I/O Intr")
+}
+
+record(ai, "$(DEVICE_NAME)Fdbk:BCtrlScaleFactor-I") {
+   	field(DESC, "DAC B Output scaling factor")
+   	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 308")
+	field(SCAN,"I/O Intr")
+}
+
+record(ai, "$(DEVICE_NAME)Fdbk:CCtrlScaleFactor-I") {
+   	field(DESC, "DAC C Output scaling factor")
+   	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 312")
+	field(SCAN,"I/O Intr")
+}
+
+record(ai, "$(DEVICE_NAME)Fdbk:DCtrlScaleFactor-I") {
+   	field(DESC, "DAC D Output scaling factor")
+   	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 316")
+	field(SCAN,"I/O Intr")
+}
+
+#Flux Calibration Factor
+record(ai, "$(DEVICE_NAME)Ampl:FluxCalFactor-I") {
+	field(DESC, "Flux calibration factor")
+	field(DTYP, "PSC Reg")
+   	field(INP, "@Rx$(DEVICE_NAME) 30 320")
+  	field(SCAN,"I/O Intr")
+	field(FLNK,"$(DEVICE_NAME)Ampl:Flux-I")		
+}
+
+#DAC-get
+record(ai, "$(DEVICE_NAME)CtrlDAC:ALevel-I") {
+	field(DESC,"Chan A DAC voltage level")
+	field(DTYP, "PSC Reg")
+	field(PREC,"3")
+	field(ESLO,".001") 	
+	field(AOFF,"0") 		
+	field(LINR,"LINEAR")
+	field(INP , "@Rx$(DEVICE_NAME) 30 324")
+	field(SCAN,"I/O Intr")
+}
+	
+record(ai, "$(DEVICE_NAME)CtrlDAC:BLevel-I") {
+	field(DESC,"Chan B DAC voltage level")
+	field(DTYP, "PSC Reg")
+	field(PREC,"3")
+	field(ESLO,".001") 	
+	field(AOFF,"0") 		
+	field(LINR,"LINEAR")
+	field(INP , "@Rx$(DEVICE_NAME) 30 328")
+	field(SCAN,"I/O Intr")
+}
+
+record(ai, "$(DEVICE_NAME)CtrlDAC:CLevel-I") {
+	field(DESC,"Chan C DAC voltage level")
+	field(DTYP, "PSC Reg")
+	field(PREC,"3")
+	field(ESLO,".001") 	
+	field(AOFF,"0") 		
+	field(LINR,"LINEAR")
+	field(INP , "@Rx$(DEVICE_NAME) 30 332")
+	field(SCAN,"I/O Intr")
+}
+
+record(ai, "$(DEVICE_NAME)CtrlDAC:DLevel-I") {
+	field(DESC,"Chan D DAC voltage level")
+	field(DTYP, "PSC Reg")
+	field(PREC,"3")
+	field(ESLO,".001") 	
+	field(AOFF,"0") 		
+	field(LINR,"LINEAR")
+	field(INP , "@Rx$(DEVICE_NAME) 30 336")
+	field(SCAN,"I/O Intr")
+}
+
+#FAST ACQUISITION
+record(ai, "$(DEVICE_NAME)FATrigActive-I") {
+	field(DESC,"FA Trigger Active")
+	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 112")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "adu")
+}
+
+record(ai, "$(DEVICE_NAME)FATrigPercDone-I") {
+	field(DESC,"FA Trigger Percent Complete")
+	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 116")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "adu")
+}
+
+record(ai, "$(DEVICE_NAME)Trig:NumSamples-I") {
+	field(DESC,"FA Trigger Number of Samples")
+	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 120")
+	field(SCAN,"I/O Intr")
+}
+
+#Embedded Event Receiver
+record(ai, "$(DEVICE_NAME)Trig:EventNum-I") {
+	field(DESC,"FA Trigger Percent Complete")
+	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 124")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "adu")
+}
+
+
+record(ai, "$(DEVICE_NAME)Trig:Dly-I") {
+	field(DESC,"FA Trigger Percent Complete")
+	field(DTYP, "PSC Reg")
+	field(INP , "@Rx$(DEVICE_NAME) 30 128")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "adu")
+}
+
+record(longin, "$(DEVICE_NAME)TS:Sec-I") {
+        field(DESC, "EVR Timestamp second")
+        field(DTYP, "PSC Reg")
+        field(INP , "@Rx$(DEVICE_NAME) 30 132")
+        field(SCAN,"I/O Intr")
+        field(EGU,  "sec")
+        field(TSE , "-2")
+        field(FLNK, "$(DEVICE_NAME)TS:Date-I")
+        info("TimeFromBlock", "132")
+        info("TimeNSScale", "8")
+}
+
+record(longin, "$(DEVICE_NAME)TS:Offset-I") {
+        field(DESC, "EVR Timestamp offset")
+        field(DTYP, "PSC Reg")
+        field(INP , "@Rx$(DEVICE_NAME) 30 136")
+        field(SCAN,"I/O Intr")
+        field(EGU,  "ns")
+        field(TSE , "-2")
+}
+
+record(stringin, "$(DEVICE_NAME)TS:Date-I") {
+    field(DTYP, "Soft Timestamp")
+    field(INP , "@ %m/%d/%Y,%H:%M:%S")
+    field(TSEL, "$(DEVICE_NAME)TS:Sec-I.TIME")
+}
+
+record(longin, "$(DEVICE_NAME)Trig:TSSec-I") {
+        field(DESC, "EVR Trigger Timestamp second")
+        field(DTYP, "PSC Reg")
+        field(INP , "@Rx$(DEVICE_NAME) 30 140")
+        field(SCAN,"I/O Intr")
+        field(EGU,  "sec")
+        field(TSE , "-2")
+        field(FLNK, "$(DEVICE_NAME)Trig:TSDate-I")
+        info("TimeFromBlock", "140")
+        info("TimeNSScale", "8")
+}
+
+record(longin, "$(DEVICE_NAME)Trig:TSOffset-I") {
+        field(DESC, "EVR Trigger Timestamp offset")
+        field(DTYP, "PSC Reg")
+        field(INP , "@Rx$(DEVICE_NAME) 30 144")
+        field(SCAN,"I/O Intr")
+        field(EGU,  "ns")
+        field(TSE , "-2")
+}
+
+record(stringin, "$(DEVICE_NAME)Trig:TSDate-I") {
+    field(DTYP, "Soft Timestamp")
+    field(INP , "@ %m/%d/%Y,%H:%M:%S")
+    field(TSEL, "$(DEVICE_NAME)Trig:TSSec-I.TIME")
+}
+
+#####################################################################
+# Waveform Records 
+#    aie_wfm_rx (Msg ID, Address, Offset)
+#
+# FA 10 kHz
+#
+#####################################################################
+
+#FAST ACQUISITION AT 10 kHz
+record(waveform,"$(DEVICE_NAME)FA-A") {
+	field(DTYP, "PSC Block F32 In")
+	field(INP , "@aie_wfm_rx_$(DEVICE_NAME) 53 0 28")
+	field(SCAN,"I/O Intr")
+	field(FTVL,"DOUBLE")
+	field(NELM,"$(FA_WFM_LEN)")
+        field(FLNK, "$(DEVICE_NAME)FA1-Fout_")
+}
+
+record(fanout, "$(DEVICE_NAME)FA1-Fout_") {
+        field(LNK1, "$(DEVICE_NAME)FA-B")
+        field(LNK2, "$(DEVICE_NAME)FA-C")
+        field(LNK3, "$(DEVICE_NAME)FA-D")
+        field(LNK4, "$(DEVICE_NAME)FA-X")
+        field(LNK5, "$(DEVICE_NAME)FA-Y")
+        field(LNK6, "$(DEVICE_NAME)FA-S")
+}
+
+record(waveform,"$(DEVICE_NAME)FA-B") {
+	field(DTYP, "PSC Block F32 In")
+	field(INP , "@aie_wfm_rx_$(DEVICE_NAME) 53 4 28")
+	field(FTVL,"DOUBLE")
+	field(NELM,"$(FA_WFM_LEN)")
+}
+
+record(waveform,"$(DEVICE_NAME)FA-C") {
+	field(DTYP, "PSC Block F32 In")
+	field(INP , "@aie_wfm_rx_$(DEVICE_NAME) 53 8 28")
+	field(FTVL,"DOUBLE")
+	field(NELM,"$(FA_WFM_LEN)")
+}
+
+record(waveform,"$(DEVICE_NAME)FA-D") {
+	field(DTYP, "PSC Block F32 In")
+	field(INP , "@aie_wfm_rx_$(DEVICE_NAME) 53 12 28")
+	field(FTVL,"DOUBLE")
+	field(NELM,"$(FA_WFM_LEN)")
+}
+
+record(waveform,"$(DEVICE_NAME)FA-X") {
+	field(DTYP, "PSC Block F32 In")
+	field(INP , "@aie_wfm_rx_$(DEVICE_NAME) 53 16 28")
+	field(FTVL,"DOUBLE")
+	field(NELM,"$(FA_WFM_LEN)")
+	field(PREC,"3")
+}
+
+record(waveform,"$(DEVICE_NAME)FA-Y") {
+	field(DTYP, "PSC Block F32 In")
+	field(INP , "@aie_wfm_rx_$(DEVICE_NAME) 53 20 28")
+	field(FTVL,"DOUBLE")
+	field(NELM,"$(FA_WFM_LEN)")
+	field(PREC,"3")
+}
+
+record(waveform,"$(DEVICE_NAME)FA-S") {
+	field(DTYP, "PSC Block F32 In")
+	field(INP , "@aie_wfm_rx_$(DEVICE_NAME) 53 24 28")
+	field(FTVL,"DOUBLE")
+	field(NELM,"$(FA_WFM_LEN)")
+}
+
+#LVDS Inputs
+
+record(bi, "$(DEVICE_NAME)Lvds:In_1") {
+   	field(DESC, "LVDS Input 1")
+   	field(DTYP, "PSC Reg")
+   	field(INP , "@Rx$(DEVICE_NAME) 30 356")
+	field(SCAN,"I/O Intr")
+}
+
+record(bi, "$(DEVICE_NAME)Lvds:In_2") {
+   	field(DESC, "LVDS Input 2")
+   	field(DTYP, "PSC Reg")
+   	field(INP , "@Rx$(DEVICE_NAME) 30 360")
+	field(SCAN,"I/O Intr")
+}

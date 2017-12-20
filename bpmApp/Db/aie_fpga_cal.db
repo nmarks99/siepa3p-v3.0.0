@@ -1,0 +1,366 @@
+
+###
+record(ai, "SR:C31-{AI}3:FPGA:x_mm-I") {
+	field(DTYP, "PSC Reg")
+	field(INP , "@aie_wfm_rx 45 0")
+	field(LINR,"LINEAR")
+	field(ESLO,"0.000001")
+	field(PREC,"3")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "mm")
+}
+
+record(ai, "SR:C31-{AI}5:FPGA:x_mm-I") {
+	field(DTYP, "PSC Reg")
+	field(INP , "@aie_wfm_rx 45 4")
+	field(LINR,"LINEAR")
+	field(ESLO,"0.000001")
+	field(PREC,"3")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "mm")
+}
+
+record(ai, "SR:C31-{AI}5-2:FPGA:x_mm-I") {
+	field(DTYP, "PSC Reg")
+	field(INP , "@aie_wfm_rx 45 8")
+	field(LINR,"LINEAR")
+	field(ESLO,"0.000001")
+	field(PREC,"3")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "mm")
+}
+
+record(ai, "SR:C31-{AI}10:FPGA:x_mm-I") {
+	field(DTYP, "PSC Reg")
+	field(INP , "@aie_wfm_rx 45 12")
+	field(LINR,"LINEAR")
+	field(ESLO,"0.000001")
+	field(PREC,"3")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "mm")
+}
+
+record(ai, "SR:C31-{AI}11:FPGA:x_mm-I") {
+	field(DTYP, "PSC Reg")
+	field(INP , "@aie_wfm_rx 45 16")
+	field(LINR,"LINEAR")
+	field(ESLO,"0.000001")
+	field(PREC,"3")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "mm")
+}
+
+record(ai, "SR:C31-{AI}23:FPGA:x_mm-I") {
+	field(DTYP, "PSC Reg")
+	field(INP , "@aie_wfm_rx 45 20")
+	field(LINR,"LINEAR")
+	field(ESLO,"0.000001")
+	field(PREC,"3")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "mm")
+}
+
+record(ai, "SR:C31-{AI}23-2:FPGA:x_mm-I") {
+        field(DTYP, "PSC Reg")
+        field(INP , "@aie_wfm_rx 45 24")
+        field(LINR,"LINEAR")
+        field(ESLO,"0.000001")
+        field(PREC,"3")
+        field(SCAN,"I/O Intr")
+        field(EGU,  "mm")
+}
+
+record(ai, "SR:C31-{AI}28:FPGA:x_mm-I") {
+	field(DTYP, "PSC Reg")
+	field(INP , "@aie_wfm_rx 45 28")
+	field(LINR,"LINEAR")
+	field(ESLO,"0.000001")
+	field(PREC,"3")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "mm")
+}
+
+record(ai, "SR:C31-{AI}28-2:FPGA:x_mm-I") {
+	field(DTYP, "PSC Reg")
+	field(INP , "@aie_wfm_rx 45 32")
+	field(LINR,"LINEAR")
+	field(ESLO,"0.000001")
+	field(PREC,"3")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "mm")
+}
+
+
+
+###  y mm offset
+record(ai, "SR:C31-{AI}3:FPGA:y_mm-I") {
+	field(DTYP, "PSC Reg")
+	field(INP , "@aie_wfm_rx 46 0")
+	field(LINR,"LINEAR")
+	field(ESLO,"0.000001")
+	field(PREC,"3")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "mm")
+}
+
+record(ai, "SR:C31-{AI}5:FPGA:y_mm-I") {
+	field(DTYP, "PSC Reg")
+	field(INP , "@aie_wfm_rx 46 4")
+	field(LINR,"LINEAR")
+	field(ESLO,"0.000001")
+	field(PREC,"3")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "mm")
+}
+
+record(ai, "SR:C31-{AI}5-2:FPGA:y_mm-I") {
+	field(DTYP, "PSC Reg")
+	field(INP , "@aie_wfm_rx 46 8")
+	field(LINR,"LINEAR")
+	field(ESLO,"0.000001")
+	field(PREC,"3")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "mm")
+}
+
+record(ai, "SR:C31-{AI}10:FPGA:y_mm-I") {
+	field(DTYP, "PSC Reg")
+	field(INP , "@aie_wfm_rx 46 12")
+	field(LINR,"LINEAR")
+	field(ESLO,"0.000001")
+	field(PREC,"3")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "mm")
+}
+
+record(ai, "SR:C31-{AI}11:FPGA:y_mm-I") {
+	field(DTYP, "PSC Reg")
+	field(INP , "@aie_wfm_rx 46 16")
+	field(LINR,"LINEAR")
+	field(ESLO,"0.000001")
+	field(PREC,"3")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "mm")
+}
+
+record(ai, "SR:C31-{AI}23:FPGA:y_mm-I") {
+	field(DTYP, "PSC Reg")
+	field(INP , "@aie_wfm_rx 46 20")
+	field(LINR,"LINEAR")
+	field(ESLO,"0.000001")
+	field(PREC,"3")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "mm")
+}
+record(ai, "SR:C31-{AI}23-2:FPGA:y_mm-I") {
+        field(DTYP, "PSC Reg")
+        field(INP , "@aie_wfm_rx 46 24")
+        field(LINR,"LINEAR")
+        field(ESLO,"0.000001")
+        field(PREC,"3")
+        field(SCAN,"I/O Intr")
+        field(EGU,  "mm")
+}
+record(ai, "SR:C31-{AI}28:FPGA:y_mm-I") {
+	field(DTYP, "PSC Reg")
+	field(INP , "@aie_wfm_rx 46 28")
+	field(LINR,"LINEAR")
+	field(ESLO,"0.000001")
+	field(PREC,"3")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "mm")
+}
+
+record(ai, "SR:C31-{AI}28-2:FPGA:y_mm-I") {
+	field(DTYP, "PSC Reg")
+	field(INP , "@aie_wfm_rx 46 32")
+	field(LINR,"LINEAR")
+	field(ESLO,"0.000001")
+	field(PREC,"3")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "mm")
+}
+
+
+###  x mrad angle
+record(ai, "SR:C31-{AI}3:FPGA:x_mrad-I") {
+	field(DTYP, "PSC Reg")
+	field(INP , "@aie_wfm_rx 47 0")
+	field(LINR,"LINEAR")
+	field(ESLO,"0.000001")
+	field(PREC,"3")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "mrad")
+}
+
+record(ai, "SR:C31-{AI}5:FPGA:x_mrad-I") {
+	field(DTYP, "PSC Reg")
+	field(INP , "@aie_wfm_rx 47 4")
+	field(LINR,"LINEAR")
+	field(ESLO,"0.000001")
+	field(PREC,"3")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "mrad")
+}
+
+record(ai, "SR:C31-{AI}5-2:FPGA:x_mrad-I") {
+	field(DTYP, "PSC Reg")
+	field(INP , "@aie_wfm_rx 47 8")
+	field(LINR,"LINEAR")
+	field(ESLO,"0.000001")
+	field(PREC,"3")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "mrad")
+}
+
+record(ai, "SR:C31-{AI}10:FPGA:x_mrad-I") {
+	field(DTYP, "PSC Reg")
+	field(INP , "@aie_wfm_rx 47 12")
+	field(LINR,"LINEAR")
+	field(ESLO,"0.000001")
+	field(PREC,"3")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "mrad")
+}
+
+record(ai, "SR:C31-{AI}11:FPGA:x_mrad-I") {
+	field(DTYP, "PSC Reg")
+	field(INP , "@aie_wfm_rx 47 16")
+	field(LINR,"LINEAR")
+	field(ESLO,"0.000001")
+	field(PREC,"3")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "mrad")
+}
+
+record(ai, "SR:C31-{AI}23:FPGA:x_mrad-I") {
+	field(DTYP, "PSC Reg")
+	field(INP , "@aie_wfm_rx 47 20")
+	field(LINR,"LINEAR")
+	field(ESLO,"0.000001")
+	field(PREC,"3")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "mrad")
+}
+record(ai, "SR:C31-{AI}23-2:FPGA:x_mrad-I") {
+        field(DTYP, "PSC Reg")
+        field(INP , "@aie_wfm_rx 47 24")
+        field(LINR,"LINEAR")
+        field(ESLO,"0.000001")
+        field(PREC,"3")
+        field(SCAN,"I/O Intr")
+        field(EGU,  "mrad")
+}
+record(ai, "SR:C31-{AI}28:FPGA:x_mrad-I") {
+	field(DTYP, "PSC Reg")
+	field(INP , "@aie_wfm_rx 47 28")
+	field(LINR,"LINEAR")
+	field(ESLO,"0.000001")
+	field(PREC,"3")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "mrad")
+}
+
+record(ai, "SR:C31-{AI}28-2:FPGA:x_mrad-I") {
+	field(DTYP, "PSC Reg")
+	field(INP , "@aie_wfm_rx 47 32")
+	field(LINR,"LINEAR")
+	field(ESLO,"0.000001")
+	field(PREC,"3")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "mrad")
+}
+
+
+
+###  y mrad angle
+record(ai, "SR:C31-{AI}3:FPGA:y_mrad-I") {
+	field(DTYP, "PSC Reg")
+	field(INP , "@aie_wfm_rx 48 0")
+	field(LINR,"LINEAR")
+	field(ESLO,"0.000001")
+	field(PREC,"3")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "mrad")
+}
+
+record(ai, "SR:C31-{AI}5:FPGA:y_mrad-I") {
+	field(DTYP, "PSC Reg")
+	field(INP , "@aie_wfm_rx 48 4")
+	field(LINR,"LINEAR")
+	field(ESLO,"0.000001")
+	field(PREC,"3")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "mrad")
+}
+
+record(ai, "SR:C31-{AI}5-2:FPGA:y_mrad-I") {
+	field(DTYP, "PSC Reg")
+	field(INP , "@aie_wfm_rx 48 8")
+	field(LINR,"LINEAR")
+	field(ESLO,"0.000001")
+	field(PREC,"3")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "mrad")
+}
+
+record(ai, "SR:C31-{AI}10:FPGA:y_mrad-I") {
+	field(DTYP, "PSC Reg")
+	field(INP , "@aie_wfm_rx 48 12")
+	field(LINR,"LINEAR")
+	field(ESLO,"0.000001")
+	field(PREC,"3")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "mrad")
+}
+
+record(ai, "SR:C31-{AI}11:FPGA:y_mrad-I") {
+	field(DTYP, "PSC Reg")
+	field(INP , "@aie_wfm_rx 48 16")
+	field(LINR,"LINEAR")
+	field(ESLO,"0.000001")
+	field(PREC,"3")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "mrad")
+}
+
+record(ai, "SR:C31-{AI}23:FPGA:y_mrad-I") {
+	field(DTYP, "PSC Reg")
+	field(INP , "@aie_wfm_rx 48 20")
+	field(LINR,"LINEAR")
+	field(ESLO,"0.000001")
+	field(PREC,"3")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "mrad")
+}
+record(ai, "SR:C31-{AI}23-2:FPGA:y_mrad-I") {
+        field(DTYP, "PSC Reg")
+        field(INP , "@aie_wfm_rx 48 24")
+        field(LINR,"LINEAR")
+        field(ESLO,"0.000001")
+        field(PREC,"3")
+        field(SCAN,"I/O Intr")
+        field(EGU,  "mrad")
+}
+record(ai, "SR:C31-{AI}28:FPGA:y_mrad-I") {
+	field(DTYP, "PSC Reg")
+	field(INP , "@aie_wfm_rx 48 28")
+	field(LINR,"LINEAR")
+	field(ESLO,"0.000001")
+	field(PREC,"3")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "mrad")
+}
+
+record(ai, "SR:C31-{AI}28-2:FPGA:y_mrad-I") {
+	field(DTYP, "PSC Reg")
+	field(INP , "@aie_wfm_rx 48 32")
+	field(LINR,"LINEAR")
+	field(ESLO,"0.000001")
+	field(PREC,"3")
+	field(SCAN,"I/O Intr")
+	field(EGU,  "mrad")
+}
+
+
+

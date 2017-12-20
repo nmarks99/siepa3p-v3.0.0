@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workbench progressCount="1" version="2.0">
+<workbenchAdvisor/>
+<window height="744" width="844" x="391" y="24">
+<fastViewData fastViewLocation="16384">
+<orientation position="512" view="org.eclipse.ui.views.ProgressView"/>
+<orientation position="512" view="org.eclipse.ui.views.ResourceNavigator"/>
+<orientation position="512" view="org.eclipse.ui.console.ConsoleView"/>
+</fastViewData>
+<perspectiveBar>
+<itemSize x="160"/>
+</perspectiveBar>
+<coolbarLayout>
+<coolItem id="file" itemType="typeToolBarContribution" x="0" y="30"/>
+<coolItem id="user" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="org.csstudio.diag.pvmanager.probe.toolbar" itemType="typeToolBarContribution" x="0" y="30"/>
+<coolItem id="org.csstudio.logbook.ui.toolbar" itemType="typeToolBarContribution" x="0" y="30"/>
+<coolItem id="org.csstudio.security.toolbar" itemType="typeToolBarContribution" x="0" y="30"/>
+<coolItem id="org.csstudio.trends.databrowser.toolbar" itemType="typeToolBarContribution" x="0" y="30"/>
+<coolItem id="org.eclipse.search.searchActionSet" itemType="typeToolBarContribution" x="0" y="30"/>
+<coolItem id="org.csstudio.opibuilder.actionSet" itemType="typeToolBarContribution" x="0" y="30"/>
+<coolItem id="org.eclipse.ui.edit.text.actionSet.annotationNavigation" itemType="typeToolBarContribution" x="0" y="30"/>
+<coolItem id="org.eclipse.ui.edit.text.actionSet.navigation" itemType="typeToolBarContribution" x="40" y="30"/>
+<coolItem id="org.eclipse.ui.DefaultTextEditor" itemType="typePlaceholder" x="-1" y="-1"/>
+<coolItem id="org.csstudio.display.pvtable.ui.editor.PVTableEditor" itemType="typePlaceholder" x="96" y="30"/>
+<coolItem id="org.csstudio.opibuilder.OPIRunner" itemType="typePlaceholder" x="329" y="30"/>
+<coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="68" y="30"/>
+<coolItem id="org.csstudio.opibuilder.OPIEditor" itemType="typePlaceholder" x="755" y="30"/>
+<coolItem id="group.editor" itemType="typeGroupMarker"/>
+</coolbarLayout>
+<page focus="true" label="&lt;Unknown Label&gt; - OPI Editor">
+<editors>
+<editorArea activeWorkbook="DefaultEditorWorkbook">
+<info part="DefaultEditorWorkbook">
+<folder appearance="1" expanded="2">
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
+</folder>
+</info>
+</editorArea>
+</editors>
+<views>
+<view id="org.eclipse.ui.views.ResourceNavigator" partName="Navigator">
+<viewState LINK_NAVIGATOR_TO_EDITOR="0" sorter="1">
+<filters>&#x0A;<filter element=".*" isEnabled="false"/>
+</filters>
+<expanded>&#x0A;<element path="/CSS"/>
+</expanded>
+<selection>&#x0A;<element path="/CSS/xbpm_SIEPA3P.opi"/>
+</selection>
+</viewState>
+</view>
+</views>
+<perspectives activePerspective="org.csstudio.opibuilder.opieditor">
+<perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
+<descriptor class="org.csstudio.utility.product.CSStudioPerspective" id="org.csstudio.utility.product.CSStudioPerspective" label="CSStudio"/>
+<alwaysOnActionSet id="org.csstudio.opibuilder.actionSet"/>
+<alwaysOnActionSet id="org.csstudio.opibuilder.editor.actionSet"/>
+<alwaysOnActionSet id="org.eclipse.search.searchActionSet"/>
+<alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.annotationNavigation"/>
+<alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.navigation"/>
+<alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.convertLineDelimitersTo"/>
+<alwaysOnActionSet id="org.eclipse.ui.actionSet.keyBindings"/>
+<alwaysOnActionSet id="org.eclipse.ui.actionSet.openFiles"/>
+<show_view_action id="org.eclipse.ui.views.ProgressView"/>
+<perspective_action id="org.csstudio.utility.product.CSStudioPerspective"/>
+<hide_toolbar_item_id id="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
+<fastViewBars>&#x0A;<fastViewBar fastViewLocation="16384" id="left" orientation="512" selectedTabId="org.eclipse.ui.views.ResourceNavigator" style="0">&#x0A;<fastViews>&#x0A;<view id="org.eclipse.ui.views.ResourceNavigator" ratio="0.29898074"/>
+</fastViews>
+</fastViewBar>
+</fastViewBars>
+<layout>&#x0A;<mainWindow>&#x0A;<info folder="true" part="left">&#x0A;<folder appearance="2" expanded="0">&#x0A;<page content="org.eclipse.ui.views.ResourceNavigator" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
+</folder>
+</info>
+<info folder="true" part="stickyFolderRight" ratio="0.7497181" ratioLeft="665" ratioRight="222" relationship="2" relative="left">&#x0A;<folder appearance="2" expanded="2">&#x0A;<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
+<page content="org.eclipse.ui.internal.introview" label="LabelNotFound"/>
+<page content="org.eclipse.ui.cheatsheets.views.CheatSheetView" label="LabelNotFound"/>
+</folder>
+</info>
+<info part="org.eclipse.ui.editorss" ratio="0.24915445" ratioLeft="221" ratioRight="666" relationship="2" relative="left"/>
+<info folder="true" part="bottom" ratio="0.6598425" ratioLeft="419" ratioRight="216" relationship="4" relative="org.eclipse.ui.editorss">&#x0A;<folder appearance="2" expanded="0">&#x0A;<page content="org.eclipse.ui.views.ProgressView" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
+</folder>
+</info>
+</mainWindow>
+</layout>
+</perspective>
+<perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
+<descriptor class="org.csstudio.opibuilder.editor.OPIEditorPerspective" id="org.csstudio.opibuilder.opieditor" label="OPI Editor"/>
+<alwaysOnActionSet id="org.csstudio.opibuilder.actionSet"/>
+<alwaysOnActionSet id="org.csstudio.opibuilder.editor.actionSet"/>
+<alwaysOnActionSet id="org.eclipse.search.searchActionSet"/>
+<alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.annotationNavigation"/>
+<alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.navigation"/>
+<alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.convertLineDelimitersTo"/>
+<alwaysOnActionSet id="org.eclipse.ui.actionSet.keyBindings"/>
+<alwaysOnActionSet id="org.eclipse.ui.actionSet.openFiles"/>
+<show_view_action id="org.eclipse.ui.views.ResourceNavigator"/>
+<show_view_action id="org.eclipse.ui.views.PropertySheet"/>
+<show_view_action id="org.eclipse.ui.views.ContentOutline"/>
+<show_view_action id="org.eclipse.ui.console.ConsoleView"/>
+<show_view_action id="org.eclipse.help.ui.HelpView"/>
+<new_wizard_action id="org.eclipse.ui.wizards.new.folder"/>
+<new_wizard_action id="org.csstudio.opibuilder.wizards.newOPIWizard"/>
+<new_wizard_action id="org.csstudio.opibuilder.wizards.newJSWizard"/>
+<new_wizard_action id="org.csstudio.opibuilder.wizards.newPyWizard"/>
+<hide_toolbar_item_id id="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
+<fastViewBars>
+<fastViewBar fastViewLocation="16384" id="left" orientation="512" selectedTabId="org.eclipse.ui.views.ResourceNavigator" style="0">
+<fastViews>
+<view id="org.eclipse.ui.views.ResourceNavigator" ratio="0.3"/>
+</fastViews>
+</fastViewBar>
+</fastViewBars>
+<layout>
+<mainWindow>
+<info folder="true" part="left">
+<folder appearance="2" expanded="2">
+<page content="org.eclipse.ui.views.ResourceNavigator" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
+</folder>
+</info>
+<info folder="true" part="stickyFolderRight" ratio="0.7497436" ratioLeft="731" ratioRight="244" relationship="2" relative="left">
+<folder appearance="2" expanded="2">
+<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
+<page content="org.eclipse.ui.internal.introview" label="LabelNotFound"/>
+<page content="org.eclipse.ui.cheatsheets.views.CheatSheetView" label="LabelNotFound"/>
+</folder>
+</info>
+<info part="org.eclipse.ui.editorss" ratio="0.2" ratioLeft="195" ratioRight="780" relationship="2" relative="left"/>
+<info folder="true" part="right" ratio="0.75" ratioLeft="585" ratioRight="195" relationship="2" relative="org.eclipse.ui.editorss">
+<folder appearance="2" expanded="2">
+<page content="org.eclipse.ui.views.PropertySheet" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
+</folder>
+</info>
+<info folder="true" part="bottom" ratio="0.75" ratioLeft="489" ratioRight="163" relationship="4" relative="org.eclipse.ui.editorss">
+<folder appearance="2" expanded="2">
+<page content="org.eclipse.ui.console.ConsoleView" label="LabelNotFound"/>
+<page content="org.eclipse.ui.views.ProgressView" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
+</folder>
+</info>
+<info folder="true" part="leftBottom" ratio="0.6993865" ratioLeft="456" ratioRight="196" relationship="4" relative="left">
+<folder appearance="2" expanded="2">
+<page content="org.eclipse.ui.views.ContentOutline" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
+</folder>
+</info>
+</mainWindow>
+</layout>
+</perspective>
+</perspectives>
+<workingSets/>
+<navigationHistory/>
+</page>
+<workbenchWindowAdvisor/>
+<actionBarAdvisor/>
+<trimLayout>
+<trimArea IMemento.internal.id="16384">
+<trimItem IMemento.internal.id="org.eclise.ui.internal.FastViewBar"/>
+<trimItem IMemento.internal.id="left"/>
+</trimArea>
+<trimArea IMemento.internal.id="128">
+<trimItem IMemento.internal.id="org.eclipse.ui.internal.progress.ProgressRegion"/>
+</trimArea>
+<trimArea IMemento.internal.id="1024">
+<trimItem IMemento.internal.id="org.eclipse.jface.action.StatusLineManager"/>
+<trimItem IMemento.internal.id="org.csstudio.security.ui.infobar"/>
+</trimArea>
+</trimLayout>
+</window>
+<mruList>
+<file factoryID="org.csstudio.opibuilder.runmode.RunnerInputFactory" id="org.csstudio.opibuilder.OPIRunner" name="xbpm_SIEPA3P.opi" tooltip="/home/jaimef/Documents/SIEPA3P/siepa3p-v3.0.0/op/CSS/xbpm_SIEPA3P.opi">
+<persistable macro="&quot;true&quot;,&quot;DEVICE_NAME=SIEPA3P{XBPM00}&quot;" path="/home/jaimef/Documents/SIEPA3P/siepa3p-v3.0.0/op/CSS/xbpm_SIEPA3P.opi"/>
+</file>
+<file factoryID="org.csstudio.opibuilder.runmode.RunnerInputFactory" id="org.csstudio.opibuilder.OPIRunner" name="xbpm_SIEPA3P.opi" tooltip="/home/jaimef/Documents/SIEPA3P/siepa3p-dev/SIEPA3P_IOC/op/CSS/xbpm_SIEPA3P.opi">
+<persistable macro="&quot;true&quot;,&quot;DEVICE_NAME=SIEPA3P{XBPM00}&quot;" path="/home/jaimef/Documents/SIEPA3P/siepa3p-dev/SIEPA3P_IOC/op/CSS/xbpm_SIEPA3P.opi"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.csstudio.opibuilder.OPIEditor" name="xbpm_SIEPA3P.opi" tooltip="CSS/xbpm_SIEPA3P.opi">
+<persistable path="/CSS/xbpm_SIEPA3P.opi"/>
+</file>
+<file factoryID="org.csstudio.opibuilder.runmode.RunnerInputFactory" id="org.csstudio.opibuilder.OPIRunner" name="xbpm_SIEPA3P.opi" tooltip="/home/jaimef/Documents/siepa3p-dev/SIEPA3P_IOC/op/CSS/xbpm_SIEPA3P.opi">
+<persistable macro="&quot;true&quot;,&quot;DEVICE_NAME=SIEPA3P{XBPM16}&quot;" path="/home/jaimef/Documents/siepa3p-dev/SIEPA3P_IOC/op/CSS/xbpm_SIEPA3P.opi"/>
+</file>
+<file factoryID="org.csstudio.opibuilder.runmode.RunnerInputFactory" id="org.csstudio.opibuilder.OPIRunner" name="xbpm_SIEPA3P.opi" tooltip="/home/jaimef/Documents/siepa3p-dev/siepa3p-v3.0.0/op/CSS/xbpm_SIEPA3P.opi">
+<persistable macro="&quot;true&quot;,&quot;DEVICE_NAME=SIEPA3P{XBPM16}&quot;" path="/home/jaimef/Documents/siepa3p-dev/siepa3p-v3.0.0/op/CSS/xbpm_SIEPA3P.opi"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.csstudio.opibuilder.OPIEditor" name="main.opi" tooltip="CSS/main.opi">
+<persistable path="/CSS/main.opi"/>
+</file>
+<file factoryID="org.csstudio.opibuilder.runmode.RunnerInputFactory" id="org.csstudio.opibuilder.OPIRunner" name="xbpm_SIEPA3P.opi" tooltip="/home/sydor/Documents/SIEPA3P/siepa3p-dev/SIEPA3P_IOC/op/CSS/xbpm_SIEPA3P.opi">
+<persistable macro="&quot;true&quot;,&quot;DEVICE_NAME=SIEPA3P{XBPM00}&quot;" path="/home/sydor/Documents/SIEPA3P/siepa3p-dev/SIEPA3P_IOC/op/CSS/xbpm_SIEPA3P.opi"/>
+</file>
+<file factoryID="org.csstudio.opibuilder.runmode.RunnerInputFactory" id="org.csstudio.opibuilder.OPIRunner" name="xbpm_SIEPA3P.opi" tooltip="/home/sydor/Documents/siepa3p-dev/SIEPA3P_IOC/op/CSS/xbpm_SIEPA3P.opi">
+<persistable macro="&quot;true&quot;,&quot;DEVICE_NAME=SIEPA3P{XBPM18}&quot;" path="/home/sydor/Documents/siepa3p-dev/SIEPA3P_IOC/op/CSS/xbpm_SIEPA3P.opi"/>
+</file>
+<file factoryID="org.csstudio.opibuilder.runmode.RunnerInputFactory" id="org.csstudio.opibuilder.OPIRunner" name="xbpm_SIEPA3P.opi" tooltip="/home/jaimef/Documents/SIEPA3P-v1.9.5/op/CSS/xbpm_SIEPA3P.opi">
+<persistable macro="&quot;true&quot;,&quot;DEVICE_NAME=SIEPA3P{XBPM17}&quot;" path="/home/jaimef/Documents/SIEPA3P-v1.9.5/op/CSS/xbpm_SIEPA3P.opi"/>
+</file>
+<file factoryID="org.csstudio.opibuilder.runmode.RunnerInputFactory" id="org.csstudio.opibuilder.OPIRunner" name="xbpm_SIEPA3P.opi" tooltip="/home/jaimef/Documents/siepa3p-v1.9.5/op/CSS/xbpm_SIEPA3P.opi">
+<persistable macro="&quot;true&quot;,&quot;DEVICE_NAME=SIEPA3P{XBPM00}&quot;" path="/home/jaimef/Documents/siepa3p-v1.9.5/op/CSS/xbpm_SIEPA3P.opi"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.csstudio.display.pvtable.ui.editor.PVTableEditor" name="Restore.pvs" tooltip="CSS/Restore.pvs">
+<persistable path="/CSS/Restore.pvs"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.csstudio.opibuilder.OPIEditor" name="xbpm_SIEPA3P_0.opi" tooltip="CSS/xbpm_SIEPA3P_0.opi">
+<persistable path="/CSS/xbpm_SIEPA3P_0.opi"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="xbpm_SIEPA3P.opi.bak" tooltip="CSS/xbpm_SIEPA3P.opi.bak">
+<persistable path="/CSS/xbpm_SIEPA3P.opi.bak"/>
+</file>
+<file factoryID="org.csstudio.opibuilder.runmode.RunnerInputFactory" id="org.csstudio.opibuilder.OPIRunner" name="xbpm_SIEPA3P.opi" tooltip="/CSS/xbpm_SIEPA3P.opi">
+<persistable path="/CSS/xbpm_SIEPA3P.opi"/>
+</file>
+<file factoryID="org.csstudio.opibuilder.runmode.RunnerInputFactory" id="org.csstudio.opibuilder.OPIRunner" name="xbpm_SIEPA3P.opi" tooltip="/home/sydor/siepa3p-dev/SIEPA3P_IOC/op/CSS/xbpm_SIEPA3P.opi">
+<persistable macro="&quot;true&quot;,&quot;DEVICE_NAME=SIEPA3P{XBPM00}&quot;" path="/home/sydor/siepa3p-dev/SIEPA3P_IOC/op/CSS/xbpm_SIEPA3P.opi"/>
+</file>
+</mruList>
+</workbench>

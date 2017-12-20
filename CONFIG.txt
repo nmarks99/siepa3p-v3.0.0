@@ -1,0 +1,9 @@
+epicsEnvSet("XBPM_IP", "10.0.143.151") 	      	 	## Electrometer IP
+epicsEnvSet("EPICS_CA_ADDR_LIST", "10.0.143.255") 	## IOC Broadcast Address 
+epicsEnvSet("DEVICE_NAME", "SIEPA3P{XBPM00}")		## Device Name
+epicsEnvSet("CSSPATH", "/usr/local/css-nsls2") 	        ## Path to CSS
+#
+#****************************************************************************
+#
+epicsEnvSet("SERIAL_NUMBER", "16")			## Electrometer Serial Number
+

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete resource &apos;CSS/XBPM_11_24_14.opi&apos;" deleteContents="false" description="Delete resource &apos;CSS/XBPM_11_24_14.opi&apos;" element1="/CSS/XBPM_11_24_14.opi" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1428714863888"/>
+</session>

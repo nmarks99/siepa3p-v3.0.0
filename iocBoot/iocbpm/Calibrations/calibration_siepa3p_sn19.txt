@@ -1,0 +1,77 @@
+#
+#******************************************************************************
+#		DEFAULT ELECTROMETER CALIBRATIONS for SIEPA3P S/N:19 
+#							DO NOT CHANGE!
+#******************************************************************************
+
+#INTERNAL BIAS CALIBRATIONS
+#--Positive
+dbpf $(DEVICE_NAME)IntBias:Cal_Set.DO2 -528			    
+dbpf $(DEVICE_NAME)IntBias:Cal_Set.DO3 0.0007359			
+#--Negative
+dbpf $(DEVICE_NAME)IntBias:Cal_Set.DO6 1343
+dbpf $(DEVICE_NAME)IntBias:Cal_Set.DO7 0.0007310
+
+#BIAS READOUT CALIBRATIONS
+#--Positive
+dbpf $(DEVICE_NAME)IntBias:Cal_Set.DO4 3200	
+#--Negative
+dbpf $(DEVICE_NAME)IntBias:Cal_Set.DO8 3200
+#--Both
+dbpf $(DEVICE_NAME)Bias:Out-I.ESLO -0.0003969
+
+#GAIN CALIBRATIONS 
+#--1uA Offsets
+dbpf $(DEVICE_NAME)ACalib_Set.DO1 -1935
+dbpf $(DEVICE_NAME)BCalib_Set.DO1 -2517
+dbpf $(DEVICE_NAME)CCalib_Set.DO1 -2123
+dbpf $(DEVICE_NAME)DCalib_Set.DO1 -1818
+#--1uA Gains
+dbpf $(DEVICE_NAME)ACalib_Set.DO2 7562
+dbpf $(DEVICE_NAME)BCalib_Set.DO2 7636
+dbpf $(DEVICE_NAME)CCalib_Set.DO2 7579
+dbpf $(DEVICE_NAME)DCalib_Set.DO2 7576
+
+#--10uA Offsets
+dbpf $(DEVICE_NAME)ACalib_Set.DO3 -1925
+dbpf $(DEVICE_NAME)BCalib_Set.DO3 -2506
+dbpf $(DEVICE_NAME)CCalib_Set.DO3 -2112
+dbpf $(DEVICE_NAME)DCalib_Set.DO3 -1808
+#--10uA Gains
+dbpf $(DEVICE_NAME)ACalib_Set.DO4 75385
+dbpf $(DEVICE_NAME)BCalib_Set.DO4 76130
+dbpf $(DEVICE_NAME)CCalib_Set.DO4 75770
+dbpf $(DEVICE_NAME)DCalib_Set.DO4 75452
+
+#--100uA Offsets
+dbpf $(DEVICE_NAME)ACalib_Set.DO5 -1925
+dbpf $(DEVICE_NAME)BCalib_Set.DO5 -2506
+dbpf $(DEVICE_NAME)CCalib_Set.DO5 -2111
+dbpf $(DEVICE_NAME)DCalib_Set.DO5 -1809
+#--100uA Gains
+dbpf $(DEVICE_NAME)ACalib_Set.DO6 753934
+dbpf $(DEVICE_NAME)BCalib_Set.DO6 761404
+dbpf $(DEVICE_NAME)CCalib_Set.DO6 757899
+dbpf $(DEVICE_NAME)DCalib_Set.DO6 754255
+
+#--1mA Offsets
+dbpf $(DEVICE_NAME)ACalib_Set.DO7 -1925
+dbpf $(DEVICE_NAME)BCalib_Set.DO7 -2505
+dbpf $(DEVICE_NAME)CCalib_Set.DO7 -2111
+dbpf $(DEVICE_NAME)DCalib_Set.DO7 -1816
+#--1mA Gains
+dbpf $(DEVICE_NAME)ACalib_Set.DO8 8615803
+dbpf $(DEVICE_NAME)BCalib_Set.DO8 8699771
+dbpf $(DEVICE_NAME)CCalib_Set.DO8 8650317
+dbpf $(DEVICE_NAME)DCalib_Set.DO8 8616135
+
+#--35mA Offsets
+dbpf $(DEVICE_NAME)ACalib_Set.DO9 -2121
+dbpf $(DEVICE_NAME)BCalib_Set.DO9 -2668
+dbpf $(DEVICE_NAME)CCalib_Set.DO9 -2335
+dbpf $(DEVICE_NAME)DCalib_Set.DO9 -2069
+#--35mA Gains
+dbpf $(DEVICE_NAME)ACalib_Set.DOA 350837225
+dbpf $(DEVICE_NAME)BCalib_Set.DOA 354669057
+dbpf $(DEVICE_NAME)CCalib_Set.DOA 353328029
+dbpf $(DEVICE_NAME)DCalib_Set.DOA 350676167

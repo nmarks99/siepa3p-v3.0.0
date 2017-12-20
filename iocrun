@@ -1,0 +1,55 @@
+#*******************************************************************
+#  iocrun
+#  version 1.0 
+#  6-20-16
+# 
+#  Sydor Instruments, LLC	
+#
+#  SIEPA3P IOC and GUI Initialization routine
+#
+#********************************************************************/
+CSSPATH=`cat CONFIG.txt|grep 'epicsEnvSet("CSSPATH"' |awk -F'[""]' '{print $4}'`
+DEVICE_NAME=`cat CONFIG.txt|grep 'epicsEnvSet("DEVICE_NAME"' |awk -F'[""]' '{print $4}'`
+DIR=`pwd`
+CSSGUI=$DIR/op/CSS/xbpm_SIEPA3P.opi
+RESTORE=$DIR/op/CSS/restore.pvs
+
+help(){
+	printf "Syntax:\n	./iocrun {Option}\nOptions:\n	{gui}: Start CSS GUI\n	{restorefile-init}: Initialize gui restore file\n	{start}: Boot IOC\n	{stop}: Stop IOC\n	{help}: This menu\n"
+}
+
+if [ ! -z $1 ];then
+	if [ $1 = 'gui' ];then
+		cd $CSSPATH
+		echo `./css-nsls2 --launcher.openfile "$CSSGUI DEVICE_NAME=$DEVICE_NAME"`
+
+	elif [ $1 = 'restorefile-init' ];then
+		str1="sed -i -- s/{INSERT_IOCNAME}/"
+		str2="$str1$IOCNAME{XBPM:$NO}/g"
+		str3="$str2$RESTORE"
+		echo `$str3`
+		echo "Restore file IOC name set"
+
+	elif [ $1 = 'start' ];then
+		printf "\n**Initialize IOC\n"
+		cd iocBoot/iocbpm/ 
+		./st.cmd
+	
+	elif [ $1 = 'stop' ];then
+		proc=$(pgrep st_xbpm_sydor|awk 'FNR ==1{print $1}')
+		kill "$proc"
+		printf "\n**IOC Stopped\n"
+
+	elif [ $1 = 'help' ];then
+		help	
+
+	else
+		printf "**Unknown function\n"
+		help	
+	fi
+
+else
+	printf "**Please select a function\n"
+	help	
+	exit 1
+fi
