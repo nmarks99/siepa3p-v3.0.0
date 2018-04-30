@@ -21,5 +21,4 @@ Follow the instructions as stated on the user's manual. The user's manual can be
 
 Contact:
 
-* Jaime Farrington
-* e-mail: jaimef@sydorinstruments.com
+* e-mail: info@sydortechnologies.com
