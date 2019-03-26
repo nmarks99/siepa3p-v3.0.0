@@ -21,7 +21,7 @@
 
 TEMPLATE_TOP=$(EPICS_BASE)/templates/makeBaseApp/top
 
-AUTOSAVE=/usr/lib/epcis/as
+AUTOSAVE=/usr/lib/epics/as
 
 ## (Optional) Local build of libevent2 for debugging
 ## If LIBEVENT is not defined, then the system version is used (eg. /usr/lib)
