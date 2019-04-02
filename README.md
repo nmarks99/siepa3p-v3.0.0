@@ -1,6 +1,7 @@
 ### SI-EP-A3P Version 3.0.0 ###
  
-This repository contains the software and user manual for the SI-EP-A3P Electrometer. Included are:
+This repository contains the software and user manual for the BPMio Intelligent Beam Position Monitor I/O Controller(Model: SI-EP-A3P).
+Included are:
 
 * EPICS IOC 
 * CSS control GUI
