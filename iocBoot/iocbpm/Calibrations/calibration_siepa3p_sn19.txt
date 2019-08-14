@@ -22,56 +22,56 @@ dbpf $(DEVICE_NAME)Bias:Out-I.ESLO -0.0003969
 
 #GAIN CALIBRATIONS 
 #--1uA Offsets
-dbpf $(DEVICE_NAME)ACalib_Set.DO1 -1935
-dbpf $(DEVICE_NAME)BCalib_Set.DO1 -2517
-dbpf $(DEVICE_NAME)CCalib_Set.DO1 -2123
-dbpf $(DEVICE_NAME)DCalib_Set.DO1 -1818
+dbpf $(DEVICE_NAME)ACalib_Set.DO1 -1922 #-1938 
+dbpf $(DEVICE_NAME)BCalib_Set.DO1 -2502 #-2514 
+dbpf $(DEVICE_NAME)CCalib_Set.DO1 -2100 #-2116 
+dbpf $(DEVICE_NAME)DCalib_Set.DO1 -1593 #-1616 
 #--1uA Gains
-dbpf $(DEVICE_NAME)ACalib_Set.DO2 7562
-dbpf $(DEVICE_NAME)BCalib_Set.DO2 7636
-dbpf $(DEVICE_NAME)CCalib_Set.DO2 7579
-dbpf $(DEVICE_NAME)DCalib_Set.DO2 7576
+dbpf $(DEVICE_NAME)ACalib_Set.DO2 7565 
+dbpf $(DEVICE_NAME)BCalib_Set.DO2 7638 
+dbpf $(DEVICE_NAME)CCalib_Set.DO2 7577 
+dbpf $(DEVICE_NAME)DCalib_Set.DO2 7570 
 
 #--10uA Offsets
-dbpf $(DEVICE_NAME)ACalib_Set.DO3 -1925
-dbpf $(DEVICE_NAME)BCalib_Set.DO3 -2506
-dbpf $(DEVICE_NAME)CCalib_Set.DO3 -2112
-dbpf $(DEVICE_NAME)DCalib_Set.DO3 -1808
+dbpf $(DEVICE_NAME)ACalib_Set.DO3 -1916 #-1930 
+dbpf $(DEVICE_NAME)BCalib_Set.DO3 -2495 #-2505 
+dbpf $(DEVICE_NAME)CCalib_Set.DO3 -2092 #-2107 
+dbpf $(DEVICE_NAME)DCalib_Set.DO3 -1578 #-1587 
 #--10uA Gains
-dbpf $(DEVICE_NAME)ACalib_Set.DO4 75385
-dbpf $(DEVICE_NAME)BCalib_Set.DO4 76130
-dbpf $(DEVICE_NAME)CCalib_Set.DO4 75770
-dbpf $(DEVICE_NAME)DCalib_Set.DO4 75452
+dbpf $(DEVICE_NAME)ACalib_Set.DO4 75418 
+dbpf $(DEVICE_NAME)BCalib_Set.DO4 76158 
+dbpf $(DEVICE_NAME)CCalib_Set.DO4 75780 
+dbpf $(DEVICE_NAME)DCalib_Set.DO4 75451 
 
 #--100uA Offsets
-dbpf $(DEVICE_NAME)ACalib_Set.DO5 -1925
-dbpf $(DEVICE_NAME)BCalib_Set.DO5 -2506
-dbpf $(DEVICE_NAME)CCalib_Set.DO5 -2111
-dbpf $(DEVICE_NAME)DCalib_Set.DO5 -1809
+dbpf $(DEVICE_NAME)ACalib_Set.DO5 -1916 #-1930 
+dbpf $(DEVICE_NAME)BCalib_Set.DO5 -2494 #-2505 
+dbpf $(DEVICE_NAME)CCalib_Set.DO5 -2092 #-2107 
+dbpf $(DEVICE_NAME)DCalib_Set.DO5 -1579 #-1586 
 #--100uA Gains
-dbpf $(DEVICE_NAME)ACalib_Set.DO6 753934
-dbpf $(DEVICE_NAME)BCalib_Set.DO6 761404
-dbpf $(DEVICE_NAME)CCalib_Set.DO6 757899
-dbpf $(DEVICE_NAME)DCalib_Set.DO6 754255
+dbpf $(DEVICE_NAME)ACalib_Set.DO6 754277 
+dbpf $(DEVICE_NAME)BCalib_Set.DO6 761713 
+dbpf $(DEVICE_NAME)CCalib_Set.DO6 758022 
+dbpf $(DEVICE_NAME)DCalib_Set.DO6 754278 
 
 #--1mA Offsets
-dbpf $(DEVICE_NAME)ACalib_Set.DO7 -1925
-dbpf $(DEVICE_NAME)BCalib_Set.DO7 -2505
-dbpf $(DEVICE_NAME)CCalib_Set.DO7 -2111
-dbpf $(DEVICE_NAME)DCalib_Set.DO7 -1816
+dbpf $(DEVICE_NAME)ACalib_Set.DO7 -1917 #-1929 
+dbpf $(DEVICE_NAME)BCalib_Set.DO7 -2495 #-2505 
+dbpf $(DEVICE_NAME)CCalib_Set.DO7 -2092 #-2107 
+dbpf $(DEVICE_NAME)DCalib_Set.DO7 -1585 #-1592 
 #--1mA Gains
-dbpf $(DEVICE_NAME)ACalib_Set.DO8 8615803
-dbpf $(DEVICE_NAME)BCalib_Set.DO8 8699771
-dbpf $(DEVICE_NAME)CCalib_Set.DO8 8650317
-dbpf $(DEVICE_NAME)DCalib_Set.DO8 8616135
+dbpf $(DEVICE_NAME)ACalib_Set.DO8 8618673 
+dbpf $(DEVICE_NAME)BCalib_Set.DO8 8702829 
+dbpf $(DEVICE_NAME)CCalib_Set.DO8 8651351 
+dbpf $(DEVICE_NAME)DCalib_Set.DO8 8614720 
 
 #--35mA Offsets
-dbpf $(DEVICE_NAME)ACalib_Set.DO9 -2121
-dbpf $(DEVICE_NAME)BCalib_Set.DO9 -2668
-dbpf $(DEVICE_NAME)CCalib_Set.DO9 -2335
-dbpf $(DEVICE_NAME)DCalib_Set.DO9 -2069
+dbpf $(DEVICE_NAME)ACalib_Set.DO9 -1916 #-2082 
+dbpf $(DEVICE_NAME)BCalib_Set.DO9 -2494 #-2634 
+dbpf $(DEVICE_NAME)CCalib_Set.DO9 -2250 #-2296 
+dbpf $(DEVICE_NAME)DCalib_Set.DO9 -1736 #-2031 
 #--35mA Gains
-dbpf $(DEVICE_NAME)ACalib_Set.DOA 350837225
-dbpf $(DEVICE_NAME)BCalib_Set.DOA 354669057
-dbpf $(DEVICE_NAME)CCalib_Set.DOA 353328029
-dbpf $(DEVICE_NAME)DCalib_Set.DOA 350676167
+dbpf $(DEVICE_NAME)ACalib_Set.DOA 351228341 
+dbpf $(DEVICE_NAME)BCalib_Set.DOA 354965319 
+dbpf $(DEVICE_NAME)CCalib_Set.DOA 353562626 
+dbpf $(DEVICE_NAME)DCalib_Set.DOA 350789276 
