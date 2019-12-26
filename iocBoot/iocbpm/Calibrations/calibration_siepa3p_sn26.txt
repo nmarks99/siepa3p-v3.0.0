@@ -6,19 +6,19 @@
 
 #INTERNAL BIAS CALIBRATIONS
 #--Positive
-dbpf $(DEVICE_NAME)IntBias:Cal_Set.DO2 -545			    
-dbpf $(DEVICE_NAME)IntBias:Cal_Set.DO3 0.0007380511			
+dbpf $(DEVICE_NAME)IntBias:Cal_Set.DO2 -559			    
+dbpf $(DEVICE_NAME)IntBias:Cal_Set.DO3 0.0007380346			
 #--Negative
-dbpf $(DEVICE_NAME)IntBias:Cal_Set.DO6 1360
-dbpf $(DEVICE_NAME)IntBias:Cal_Set.DO7 0.00073
+dbpf $(DEVICE_NAME)IntBias:Cal_Set.DO6 1254
+dbpf $(DEVICE_NAME)IntBias:Cal_Set.DO7 0.0007318748
 
 #BIAS READOUT CALIBRATIONS
 #--Positive
-dbpf $(DEVICE_NAME)IntBias:Cal_Set.DO4 2483	
+dbpf $(DEVICE_NAME)IntBias:Cal_Set.DO4 2448	
 #--Negative
-dbpf $(DEVICE_NAME)IntBias:Cal_Set.DO8 2454
+dbpf $(DEVICE_NAME)IntBias:Cal_Set.DO8 2463
 #--Both
-dbpf $(DEVICE_NAME)Bias:Out-I.ESLO -0.0003968
+dbpf $(DEVICE_NAME)Bias:Out-I.ESLO -0.0004579511
 
 #GAIN CALIBRATIONS 
 #--1uA Offsets
@@ -66,10 +66,10 @@ dbpf $(DEVICE_NAME)CCalib_Set.DO8 9853082
 dbpf $(DEVICE_NAME)DCalib_Set.DO8 9850684 
 
 #--35mA Offsets
-dbpf $(DEVICE_NAME)ACalib_Set.DO9 -1037 #-1039 
-dbpf $(DEVICE_NAME)BCalib_Set.DO9 -531 #-533 
-dbpf $(DEVICE_NAME)CCalib_Set.DO9 -877 #-880 
-dbpf $(DEVICE_NAME)DCalib_Set.DO9 -910 #-913 
+dbpf $(DEVICE_NAME)ACalib_Set.DO9 -1014 #-1039 
+dbpf $(DEVICE_NAME)BCalib_Set.DO9 -510 #-533 
+dbpf $(DEVICE_NAME)CCalib_Set.DO9 -856 #-880 
+dbpf $(DEVICE_NAME)DCalib_Set.DO9 -889 #-913 
 #--35mA Gains
 dbpf $(DEVICE_NAME)ACalib_Set.DOA 402076595 
 dbpf $(DEVICE_NAME)BCalib_Set.DOA 397976008 
