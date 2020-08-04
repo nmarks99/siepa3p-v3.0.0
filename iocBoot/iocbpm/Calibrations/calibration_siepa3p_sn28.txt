@@ -1,0 +1,57 @@
+SN28-200731
+2020-07-31 12:44:19
+#GAIN CALIBRATIONS
+#--1uA Offsets
+dbpf $(DEVICE_NAME)ACalib_Set.DO1 -1193 
+dbpf $(DEVICE_NAME)BCalib_Set.DO1 -877 
+dbpf $(DEVICE_NAME)CCalib_Set.DO1 -1085 
+dbpf $(DEVICE_NAME)DCalib_Set.DO1 -766 
+#--1uA Gains
+dbpf $(DEVICE_NAME)ACalib_Set.DO2 8705 
+dbpf $(DEVICE_NAME)BCalib_Set.DO2 8611 
+dbpf $(DEVICE_NAME)CCalib_Set.DO2 8742 
+dbpf $(DEVICE_NAME)DCalib_Set.DO2 8594 
+
+#--10uA Offsets
+dbpf $(DEVICE_NAME)ACalib_Set.DO3 -1178 
+dbpf $(DEVICE_NAME)BCalib_Set.DO3 -858 
+dbpf $(DEVICE_NAME)CCalib_Set.DO3 -1066 
+dbpf $(DEVICE_NAME)DCalib_Set.DO3 -745 
+#--10uA Gains
+dbpf $(DEVICE_NAME)ACalib_Set.DO4 87129 
+dbpf $(DEVICE_NAME)BCalib_Set.DO4 86433 
+dbpf $(DEVICE_NAME)CCalib_Set.DO4 86944 
+dbpf $(DEVICE_NAME)DCalib_Set.DO4 86455 
+
+#--100uA Offsets
+dbpf $(DEVICE_NAME)ACalib_Set.DO5 -1176 
+dbpf $(DEVICE_NAME)BCalib_Set.DO5 -856 
+dbpf $(DEVICE_NAME)CCalib_Set.DO5 -1065 
+dbpf $(DEVICE_NAME)DCalib_Set.DO5 -743 
+#--100uA Gains
+dbpf $(DEVICE_NAME)ACalib_Set.DO6 871206 
+dbpf $(DEVICE_NAME)BCalib_Set.DO6 864354 
+dbpf $(DEVICE_NAME)CCalib_Set.DO6 869383 
+dbpf $(DEVICE_NAME)DCalib_Set.DO6 864570 
+
+#--1mA Offsets
+dbpf $(DEVICE_NAME)ACalib_Set.DO7 -1176 
+dbpf $(DEVICE_NAME)BCalib_Set.DO7 -856 
+dbpf $(DEVICE_NAME)CCalib_Set.DO7 -1064 
+dbpf $(DEVICE_NAME)DCalib_Set.DO7 -743 
+#--1mA Gains
+dbpf $(DEVICE_NAME)ACalib_Set.DO8 9954399 
+dbpf $(DEVICE_NAME)BCalib_Set.DO8 9875370 
+dbpf $(DEVICE_NAME)CCalib_Set.DO8 9932282 
+dbpf $(DEVICE_NAME)DCalib_Set.DO8 9877656 
+
+#--35mA Offsets
+dbpf $(DEVICE_NAME)ACalib_Set.DO9 -1493 #-1504 
+dbpf $(DEVICE_NAME)BCalib_Set.DO9 -1144 #-1154 
+dbpf $(DEVICE_NAME)CCalib_Set.DO9 -1296 #-1308 
+dbpf $(DEVICE_NAME)DCalib_Set.DO9 -1263 #-1048 
+#--35mA Gains
+dbpf $(DEVICE_NAME)ACalib_Set.DOA 404756148 
+dbpf $(DEVICE_NAME)BCalib_Set.DOA 402079534 
+dbpf $(DEVICE_NAME)CCalib_Set.DOA 404651070 
+dbpf $(DEVICE_NAME)DCalib_Set.DOA 402409860 
