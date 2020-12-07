@@ -1,6 +1,26 @@
-SN27-200804
-2020-08-04 14:00:27
-#GAIN CALIBRATIONS
+#
+#******************************************************************************
+#		DEFAULT ELECTROMETER CALIBRATIONS for SIEPA3P S/N:27 
+#							DO NOT CHANGE!
+#******************************************************************************
+
+#INTERNAL BIAS CALIBRATIONS
+#--Positive
+dbpf $(DEVICE_NAME)IntBias:Cal_Set.DO2 -570			    
+dbpf $(DEVICE_NAME)IntBias:Cal_Set.DO3 0.0007373604			
+#--Negative
+dbpf $(DEVICE_NAME)IntBias:Cal_Set.DO6 1093
+dbpf $(DEVICE_NAME)IntBias:Cal_Set.DO7 0.0007371241
+
+#BIAS READOUT CALIBRATIONS
+#--Positive
+dbpf $(DEVICE_NAME)IntBias:Cal_Set.DO4 2464	
+#--Negative
+dbpf $(DEVICE_NAME)IntBias:Cal_Set.DO8 2406
+#--Both
+dbpf $(DEVICE_NAME)Bias:Out-I.ESLO -0.0004585669
+
+#GAIN CALIBRATIONS 
 #--1uA Offsets
 dbpf $(DEVICE_NAME)ACalib_Set.DO1 -902 
 dbpf $(DEVICE_NAME)BCalib_Set.DO1 -1014 
