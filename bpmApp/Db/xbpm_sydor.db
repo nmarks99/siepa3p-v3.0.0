@@ -641,9 +641,9 @@ record(ao, "$(DEVICE_NAME)CtrlDAC:CLevel-SP") {
 	field(ESLO, ".001") 	
 	field(AOFF, "0") 		
 	field(LINR, "LINEAR")
-	field(PREC, "3")
-	field(DRVH, "10.000")
-	field(DRVL, "-10.000")
+	field(PREC, "5")
+	field(DRVH, "1000.000")
+	field(DRVL, "-1000.000")
  	field(OUT, "@aie_tx_$(DEVICE_NAME) 1 178")
    	field(FLNK, "$(DEVICE_NAME)GoRegSingleWrite")
 }
@@ -1740,7 +1740,7 @@ record(ai, "$(DEVICE_NAME)CtrlDAC:BLevel-I") {
 record(ai, "$(DEVICE_NAME)CtrlDAC:CLevel-I") {
 	field(DESC,"Chan C DAC voltage level")
 	field(DTYP, "PSC Reg")
-	field(PREC,"3")
+	field(PREC,"5")
 	field(ESLO,".001") 	
 	field(AOFF,"0") 		
 	field(LINR,"LINEAR")
