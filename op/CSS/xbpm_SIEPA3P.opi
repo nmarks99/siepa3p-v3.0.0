@@ -18155,7 +18155,7 @@ $(pv_value)</tooltip>
           </foreground_color>
           <widget_type>Label</widget_type>
           <enabled>true</enabled>
-          <text>C Scale (100V/mA)</text>
+          <text>C Scale (100mV/uA)</text>
           <font>
             <fontdata fontName="Ubuntu" height="9" style="0" />
           </font>
