@@ -45,14 +45,17 @@ dbpf $(DEVICE_NAME)Trig:NumSamples-SP.DRVH   	131072
 
 #Feedback
 #--Feedback enable (ON/OFF)
-dbpf $(DEVICE_NAME)Fdbk:AEn-SP 		0  #CHA OFF
-dbpf $(DEVICE_NAME)Fdbk:BEn-SP 		0  #CHB OFF
+#///
+#dbpf $(DEVICE_NAME)Fdbk:AEn-SP 		0  #CHA OFF
+#dbpf $(DEVICE_NAME)Fdbk:BEn-SP 		0  #CHB OFF
 
 #--Feedback auto Reenable
-dbpf $(DEVICE_NAME)Fdbk:Reenable	1  #ON
+#///
+#dbpf $(DEVICE_NAME)Fdbk:Reenable	1  #ON
 
 #--Feedback LVDS Disablng
-dbpf $(DEVICE_NAME)Fdbk:LvdsEn		1  #ON
+#///
+#dbpf $(DEVICE_NAME)Fdbk:LvdsEn		1  #ON
 
 #--Feedback sequencer
 seq fdbkseq DEVICE_NAME=$(DEVICE_NAME)
