@@ -49,8 +49,9 @@ epicsThreadSleep 1
 dbpf $(DEVICE_NAME)Leds-SP 16776216
 epicsThreadSleep 1
 dbpf $(DEVICE_NAME)Leds-SP 0
-dbpf $(DEVICE_NAME)IntBias:Pol-SP 0
+#dbpf $(DEVICE_NAME)IntBias:Pol-SP 0
 
+dbpf $(DEVICE_NAME)ASKic1.PROC 1
 #
 #******************************************************************************
 #			ELECTROMETER INITIALIZATION COMPLETE
