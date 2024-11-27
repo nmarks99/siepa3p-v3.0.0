@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <errlog.h>
 #include <epicsExport.h>
+#include <string.h>
 
 int pdu_subDebug = 1;
 

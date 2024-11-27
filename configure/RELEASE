@@ -21,7 +21,11 @@
 
 TEMPLATE_TOP=$(EPICS_BASE)/templates/makeBaseApp/top
 
-AUTOSAVE=/usr/lib/epics/as
+SUPPORT=/APSshare/epics/synApps_6_3/support
+
+AUTOSAVE=$(SUPPORT)/autosave-R5-11
+DEVIOCSTATS=$(SUPPORT)/iocStats-3-1-16
+CAPUTLOG=/home/beams/NMARKS/devel/sydor-bpm/caPutLog
 
 ## (Optional) Local build of libevent2 for debugging
 ## If LIBEVENT is not defined, then the system version is used (eg. /usr/lib)
@@ -29,9 +33,10 @@ AUTOSAVE=/usr/lib/epics/as
 
 # If using the sequencer, point SNCSEQ at its top directory:
 #SNCSEQ=$(EPICS_BASE)/../modules/soft/seq
+SNCSEQ=$(SUPPORT)/sequencer-mirror-R2-2-9
 
 # EPICS_BASE usually appears last so other apps can override stuff:
-EPICS_BASE=/usr/lib/epics
+EPICS_BASE=/APSshare/epics/base-7.0.8
 
 # Set RULES here if you want to take build rules from somewhere
 # other than EPICS_BASE:

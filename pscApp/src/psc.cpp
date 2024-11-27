@@ -575,7 +575,7 @@ static void PSCRegister(void)
     int ret =
 #if defined(WIN32)
         evthread_use_windows_threads();
-#elif defined(_EVENT_HAVE_PTHREADS)
+#elif defined(EVENT__HAVE_PTHREADS) // _EVENT_HAVE_PTHREADS
         evthread_use_pthreads();
 #else
         1;

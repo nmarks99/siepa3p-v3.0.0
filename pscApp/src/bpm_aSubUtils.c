@@ -14,6 +14,7 @@
 #include <waveformRecord.h>
 #include <epicsExport.h>
 #include <epicsTime.h>
+#include <math.h>
 
 /* TBT and FA waveform 'nm' to 'mm' unit conversion */
 static long bpmPosXyUnitConvrsion(aSubRecord *pasub)

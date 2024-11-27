@@ -14,6 +14,7 @@
 #include <epicsTime.h>        
 #include <dbAccess.h>         
 #include <alarm.h>            
+#include "dbAccessDefsExtra.h"
 
 
 static int fbckSupInit(subRecord *psub)
